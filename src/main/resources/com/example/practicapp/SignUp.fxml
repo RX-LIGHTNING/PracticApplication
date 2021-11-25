@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.SignUpController">
+   <children>
+      <Text layoutX="-9.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vkid" textAlignment="CENTER" wrappingWidth="251.1953125" x="283.0" y="49.0">
+         <font>
+            <Font name="Corbel Italic" size="110.0" />
+         </font></Text>
+      <TextField alignment="CENTER" layoutX="296.0" layoutY="333.0" prefHeight="31.0" prefWidth="206.0" promptText="введите ваш логин" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
+      <Button layoutX="341.0" layoutY="424.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" style="-fx-background-color: #18A4e0; -fx-text-fill: white; -fx-background-radius: 0;" text="Регистрация" textAlignment="CENTER" />
+      <PasswordField alignment="CENTER" layoutX="296.0" layoutY="380.0" prefHeight="31.0" prefWidth="206.0" promptText="Введите ваш пароль" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
+      <Button layoutX="744.0" layoutY="2.0" mnemonicParsing="false" onAction="#exitApplication" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="X" />
+      <Button layoutX="691.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="—" />
+      <Text layoutX="387.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Кто вы?" />
+      <CheckBox layoutX="353.0" layoutY="184.0" mnemonicParsing="false" text="Я заказчик" />
+      <CheckBox layoutX="353.0" layoutY="214.0" mnemonicParsing="false" text="Я поставщик" />
+      <TextField alignment="CENTER" layoutX="296.0" layoutY="286.0" prefHeight="31.0" prefWidth="206.0" promptText="введите вашу эл. почту" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
+      <TextField alignment="CENTER" layoutX="296.0" layoutY="245.0" prefHeight="31.0" prefWidth="206.0" promptText="введите название вашей компании" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
+      <Hyperlink layoutX="6.0" layoutY="3.0" onAction="#showSignIn" text="Назад" />
+   </children>
+</Pane>

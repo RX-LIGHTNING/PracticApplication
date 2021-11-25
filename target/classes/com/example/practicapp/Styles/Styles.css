@@ -1,0 +1,8 @@
+#NavbarButton:hover{
+-fx-background-color: #18A4E0;
+-fx-background-radius:10px;
+-fx-text-fill: white;
+}
+#NavbarButton{
+-fx-background-color:transparent;
+}
