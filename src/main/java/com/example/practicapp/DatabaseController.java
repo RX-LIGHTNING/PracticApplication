@@ -1,5 +1,7 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.User;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
@@ -43,8 +45,8 @@ abstract class DatabaseController {
             preparedStatement.setString(2,password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-//                User.setLogin(resultSet.getString("login"));
-//                User.setId(resultSet.getInt("id"));
+                User.setLogin(resultSet.getString("login"));
+                User.setId(resultSet.getInt("id"));
 //                User.setContact(resultSet.getString("contacts"));
                 preparedStatement.close();
                 result = true;

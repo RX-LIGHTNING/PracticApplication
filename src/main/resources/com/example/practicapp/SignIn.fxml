@@ -14,12 +14,12 @@
          <font>
             <Font name="Corbel Italic" size="110.0" />
          </font></Text>
-      <TextField alignment="CENTER" layoutX="303.0" layoutY="293.0" prefHeight="31.0" prefWidth="206.0" promptText="введите ваш логин" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
-      <Button layoutX="348.0" layoutY="387.0" mnemonicParsing="false" onAction="#ShowMainMenu" prefHeight="31.0" prefWidth="115.0" style="-fx-background-color: #18A4e0; -fx-text-fill: white; -fx-background-radius: 0;" text="Войти" textAlignment="CENTER" />
-      <PasswordField alignment="CENTER" layoutX="303.0" layoutY="340.0" prefHeight="31.0" prefWidth="206.0" promptText="Введите ваш пароль" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
+      <TextField fx:id="loginField" alignment="CENTER" layoutX="303.0" layoutY="293.0" prefHeight="31.0" prefWidth="206.0" promptText="введите ваш логин" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
+      <Button layoutX="348.0" layoutY="387.0" mnemonicParsing="false" onAction="#applySignIn" prefHeight="31.0" prefWidth="115.0" style="-fx-background-color: #18A4e0; -fx-text-fill: white; -fx-background-radius: 0;" text="Войти" textAlignment="CENTER" />
+      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="303.0" layoutY="340.0" prefHeight="31.0" prefWidth="206.0" promptText="Введите ваш пароль" style="-fx-background-color: #C4C4C4; -fx-prompt-text-fill: #797979;" />
       <Button layoutX="744.0" layoutY="2.0" mnemonicParsing="false" onAction="#exitApplication" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="X" />
       <Button layoutX="691.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="—" />
-      <Text layoutX="325.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="У вас нету учетной записи?" />
-      <Hyperlink layoutX="355.0" layoutY="457.0" onAction="#ShowSignUp" text="Нажмите сюда" textAlignment="CENTER" />
+      <Text layoutX="331.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="У вас нету учетной записи?" />
+      <Hyperlink layoutX="361.0" layoutY="457.0" onAction="#ShowSignUp" text="Нажмите сюда" textAlignment="CENTER" />
    </children>
 </Pane>
