@@ -13,10 +13,12 @@ import java.util.Base64;
 import java.util.Objects;
 
 abstract class DatabaseController {
-    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Practic";
+    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Vkid";
     private final static String username = "postgres";
     private final static String password = "root";
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
+    private static final String USER_FIND_QUERY = "SELECT * FROM users WHERE login = ?";
+    private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
     private static Connection connection;
 
     public static Connection getConnection() {
@@ -48,6 +50,49 @@ abstract class DatabaseController {
                 User.setLogin(resultSet.getString("login"));
                 User.setId(resultSet.getInt("id"));
 //                User.setContact(resultSet.getString("contacts"));
+                preparedStatement.close();
+                result = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean signUp(String login, String password,String mail,String orgname,int flag) throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException {
+        boolean result = false;
+        if(!isUserExist(login)&& !Objects.equals(login, "")&& !Objects.equals(password, "") && !Objects.equals(mail, "")&& !Objects.equals(orgname, "")) {
+            SecureRandom random = new SecureRandom();
+            byte[] salt = new byte[16];
+            random.nextBytes(salt);
+            salt = login.getBytes();
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] hash = factory.generateSecret(spec).getEncoded();
+            password = Base64.getEncoder().encodeToString(hash);
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(USER_INSERT_QUERY)) {
+                preparedStatement.setString(1, login);
+                preparedStatement.setString(2, password);
+                preparedStatement.setString(3, orgname);
+                preparedStatement.setString(4, mail);
+                preparedStatement.setInt(5, flag);
+                preparedStatement.execute();
+                result = true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else{result=false;}
+        return result;
+    }
+    public static boolean isUserExist(String login) {
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(USER_FIND_QUERY)) {
+            preparedStatement.setString(1,login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
                 preparedStatement.close();
                 result = true;
             }

@@ -22,9 +22,15 @@ public class SignInController {
         ApplicationCoreController.ShowSingUpMenu();
     }
     public void applySignIn() throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException, IOException {
-        if(DatabaseController.isLoggedIn("123", "123")) {
-
+        if(DatabaseController.isLoggedIn(loginField.getText(), passwordField.getText())) {
             ApplicationCoreController.ShowMainMenu();
+        }else {
+            if (DatabaseController.isUserExist(loginField.getText())) {
+
+            }
+            else {
+
+            }
         }
     }
 }

@@ -11,12 +11,12 @@
          <children>
             <VBox layoutX="-22.0" layoutY="40.0" prefHeight="453.0" prefWidth="184.0">
                <children>
-                  <Button id="NavbarButton" fx:id="CustomerButton1" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Товары">
+                  <Button id="NavbarButton" fx:id="CustomerButton1" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Товары" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button id="NavbarButton" fx:id="CustomerButton11" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Заказы">
+                  <Button id="NavbarButton" fx:id="CustomerButton11" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Заказы" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -26,7 +26,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button id="NavbarButton" fx:id="CustomerButton13" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Выйти">
+                  <Button id="NavbarButton" fx:id="CustomerButton13" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Выйти" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
