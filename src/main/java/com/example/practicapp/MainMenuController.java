@@ -23,22 +23,17 @@ public class MainMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/cart.png")));
         CustomerButton1.setGraphic(new ImageView(image));
-        CustomerButton1.graphicProperty().getValue().setScaleX(0.5);
-        CustomerButton1.graphicProperty().getValue().setScaleY(0.5);
         //
         image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/order.png")));
         CustomerButton11.setGraphic(new ImageView(image));
-        CustomerButton11.graphicProperty().getValue().setScaleX(0.5);
-        CustomerButton11.graphicProperty().getValue().setScaleY(0.5);
         //
         image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/settings.png")));
         CustomerButton12.setGraphic(new ImageView(image));
-        CustomerButton12.graphicProperty().getValue().setScaleX(0.3);
-        CustomerButton12.graphicProperty().getValue().setScaleY(0.3);
         //
         image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
         CustomerButton13.setGraphic(new ImageView(image));
-        CustomerButton13.graphicProperty().getValue().setScaleX(0.5);
-        CustomerButton13.graphicProperty().getValue().setScaleY(0.5);
+    }
+    public void exitApplication(){
+        System.exit(1);
     }
 }

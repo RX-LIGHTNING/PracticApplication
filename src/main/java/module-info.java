@@ -4,7 +4,8 @@ module com.example.practicapp {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
-
+    requires org.postgresql.jdbc;
+    requires java.sql;
     opens com.example.practicapp to javafx.fxml;
     exports com.example.practicapp;
 }
