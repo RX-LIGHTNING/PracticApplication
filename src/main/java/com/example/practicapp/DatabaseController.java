@@ -1,5 +1,6 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Product;
 import com.example.practicapp.objects.User;
 
 import javax.crypto.SecretKeyFactory;
@@ -10,6 +11,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.*;
 import java.util.Base64;
+import java.util.List;
 import java.util.Objects;
 
 abstract class DatabaseController {
@@ -19,6 +21,7 @@ abstract class DatabaseController {
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
     private static final String USER_FIND_QUERY = "SELECT * FROM users WHERE login = ?";
     private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
+    private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
     private static Connection connection;
 
     public static Connection getConnection() {
@@ -95,6 +98,25 @@ abstract class DatabaseController {
             if (resultSet.next()) {
                 preparedStatement.close();
                 result = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static List<Product> getProducts(){
+        List<Product> result = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_SELECT_QUERY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                result.add(new Product(
+                        resultSet.getString("name"),
+                        resultSet.getInt("price"),
+                        resultSet.getString("picture"),
+                        resultSet.getString("description")
+                ));
             }
 
         } catch (SQLException e) {

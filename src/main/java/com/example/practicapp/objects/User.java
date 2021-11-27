@@ -17,32 +17,19 @@ public final class User {
     public static String getLogin() {
         return login;
     }
-
     public static void setLogin(String login) {
         User.login = login;
     }
-
     public static String getPassword() {
         return password;
     }
-
     public static void setPassword(String password) {
         User.password = password;
     }
-
-    public static Boolean getIsadmin() {
+    public static Boolean isAdmin() {
         return isadmin;
     }
-
-    public static void setIsadmin(Boolean isadmin) {
-        User.isadmin = isadmin;
-    }
-
     public static int getFlag() {
         return flag;
-    }
-
-    public static void setFlag(int flag) {
-        User.flag = flag;
     }
 }
