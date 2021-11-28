@@ -42,7 +42,7 @@ public class ProductListController implements Initializable {
                     Pane anchorPane = fxmlLoader.load();
 
                     ProductItemController controller = fxmlLoader.getController();
-                    controller.setData(products.get(i).getName(), products.get(i).getPrice(), mainMenuController);
+                    controller.setData(products.get(i).getName(), products.get(i).getPrice(),products.get(i).getImage(), mainMenuController);
                     if (column == 3) {
                         column = 0;
                         row++;
