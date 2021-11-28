@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="160.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.ProductLabelController">
+   <children>
+      <Button layoutX="78.0" layoutY="161.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #18A4E0; -fx-background-radius: 0;" text="Заказать" />
+      <Text fx:id="PriceField" layoutX="14.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="180р/шт" wrappingWidth="51.13671875" />
+      <Text fx:id="ProductName" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ржаная булка" textAlignment="CENTER" wrappingWidth="160.0" />
+      <ImageView fx:id="ProductImage" fitHeight="127.0" fitWidth="150.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>
