@@ -1,4 +1,4 @@
-package com.example.practicapp.objects;
+package com.example.practicapp;
 
 import javafx.scene.image.Image;
 
@@ -34,7 +34,7 @@ public class Product {
     public Product(String name, int price, String image, String description) {
         this.name = name;
         this.price = price;
-        this.image = new Image(String.valueOf(image));
+        //this.image = new Image(String.valueOf(image));
         this.description = description;
     }
 }

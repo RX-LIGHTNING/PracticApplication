@@ -1,6 +1,5 @@
 package com.example.practicapp;
 
-import com.example.practicapp.objects.Product;
 import com.example.practicapp.objects.User;
 
 import javax.crypto.SecretKeyFactory;
@@ -10,12 +9,13 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
 abstract class DatabaseController {
-    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Vkid";
+    private final static String jdbcURL = "jdbc:postgresql://192.168.100.4:5432/Vkid";
     private final static String username = "postgres";
     private final static String password = "root";
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
@@ -106,7 +106,7 @@ abstract class DatabaseController {
         return result;
     }
     public static List<Product> getProducts(){
-        List<Product> result = null;
+        List<Product> result = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_SELECT_QUERY)) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -124,4 +124,6 @@ abstract class DatabaseController {
         }
         return result;
     }
+
+    
 }

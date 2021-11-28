@@ -41,7 +41,7 @@ public class MainMenuController implements Initializable {
     }
     public void setProductListPane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("MainMenuPages/ProductList.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("ProductList.fxml"));
         Pane anchorPane = fxmlLoader.load();
         ProductListController controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this);
