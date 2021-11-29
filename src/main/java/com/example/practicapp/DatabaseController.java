@@ -25,8 +25,9 @@ abstract class DatabaseController {
     private static final String USER_FIND_QUERY = "SELECT * FROM users WHERE login = ?";
     private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
+    private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
     private static final String PROVIDER_SELECT_QUERY = "SELECT * FROM providers";
-    private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, productid, date, contacts) VALUES (?,?,?,?,?)";
+    private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
     private static Connection connection;
 
     public static Connection getConnection() {
@@ -155,13 +156,13 @@ abstract class DatabaseController {
         }
         return result;
     }
-    public static boolean OrderInsert(int quantity,int prodid, Date date,String contact) {
+    public static boolean OrderInsert(int quantity,String prod, Date date,String contact) {
         boolean result = false;
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(ORDER_INSERT_QUERY)) {
                 preparedStatement.setString(1, User.getOrganization());
                 preparedStatement.setInt(2, quantity);
-                preparedStatement.setInt(3, prodid);
+                preparedStatement.setString(3, prod);
                 preparedStatement.setDate(4, date);
                 preparedStatement.setString(5,contact);
                 preparedStatement.execute();
@@ -175,14 +176,15 @@ abstract class DatabaseController {
     public static List<Order> getOrders() {
         List<Order> result = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_SELECT_QUERY)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ORDERS_SELECT_QUERY)) {
+            preparedStatement.setString(1,User.getOrganization());
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
                 result.add(new Order(
                         resultSet.getInt("id"),
                         resultSet.getString("organization"),
                         resultSet.getInt("quantity"),
-                        resultSet.getInt("productid"),
+                        resultSet.getString("product"),
                         resultSet.getDate("date"),
                         resultSet.getString("contacts")
                 ));

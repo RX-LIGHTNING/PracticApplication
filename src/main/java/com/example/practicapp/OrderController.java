@@ -22,10 +22,12 @@ public class OrderController {
     private TextField productQuantity;
     MainMenuController mainMenuController;
     private int id;
+    private String name;
     public void setData(MainMenuController mainMenuController, Product product) {
         this.mainMenuController = mainMenuController;
         ItemName.setText(product.getName());
         this.id = product.getId();
+        this.name = product.getName();
     }
     public void toProductListPane() throws IOException {
         mainMenuController.setProductListPane();
@@ -37,7 +39,7 @@ public class OrderController {
                 !Objects.equals(productQuantity.getText(), "") &&
                 !Objects.equals(contactField.getText(),"")
         ){
-            DatabaseController.OrderInsert(Integer.parseInt(productQuantity.getText()),this.id, gettedDatePickerDate,contactField.getText());
+            DatabaseController.OrderInsert(Integer.parseInt(productQuantity.getText()),this.name, gettedDatePickerDate,contactField.getText());
             mainMenuController.setProductListPane();
         }
     }

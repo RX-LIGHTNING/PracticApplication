@@ -91,7 +91,6 @@ public class MainMenuController implements Initializable {
         Pane anchorPane = fxmlLoader.load();
         OrderController controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this, product);
-        System.out.println(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
     }
     public void setMyOrderPane() throws IOException {
@@ -100,7 +99,6 @@ public class MainMenuController implements Initializable {
         Pane anchorPane = fxmlLoader.load();
         MyOrderController controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this);
-        System.out.println(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
     }
 

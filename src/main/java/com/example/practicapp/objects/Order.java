@@ -1,6 +1,6 @@
 package com.example.practicapp.objects;
-
 import java.sql.Date;
+import java.util.List;
 
 public class Order {
     public int getId() {
@@ -27,13 +27,10 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public int getProductid() {
+    public String getProduct() {
         return productid;
     }
 
-    public void setProductid(int productid) {
-        this.productid = productid;
-    }
 
     public Date getDate() {
         return date;
@@ -54,15 +51,15 @@ public class Order {
     private int id;
 private String organzition;
 private int quantity;
-private int productid;
+private String productid;
 private Date date;
 private String Contact;
 
-    public Order(int id, String organization, int quantity, int productid, Date date, String contacts) {
+    public Order(int id, String organization, int quantity, String product, Date date, String contacts) {
         this.id = id;
-        this.organzition = organzition;
+        this.organzition = organization;
         this.quantity = quantity;
-        this.productid = productid;
+        this.productid = product;
         this.date = date;
         this.Contact = contacts;
 

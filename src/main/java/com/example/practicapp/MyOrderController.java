@@ -20,41 +20,41 @@ public class MyOrderController{
     private GridPane gridPane;
 
     MainMenuController mainMenuController;
-//    public void setData(MainMenuController parentController){
-//
-//        mainMenuController = parentController;
-//        updategrid("");
-//    }
-//    public void updategrid(String filter){
-//        gridPane.getChildren().clear();
-//        List<Order> orders = DatabaseController.getOrders();
-//        int row = 1;
-//        try {
-//            for (int i = 0; i < orders.size(); i++) {
-//                if (orders.get(i).contains(filter)) {
-//                    FXMLLoader fxmlLoader = new FXMLLoader();
-//                    fxmlLoader.setLocation(getClass().getResource("ProviderItem.fxml"));
-//                    Pane anchorPane = fxmlLoader.load();
-//
-//                    ProviderItemController controller = fxmlLoader.getController();
+    public void setData(MainMenuController parentController){
+
+        mainMenuController = parentController;
+        updategrid("");
+    }
+    public void updategrid(String filter){
+        gridPane.getChildren().clear();
+        List<Order> orders = DatabaseController.getOrders();
+        int row = 1;
+        try {
+            for (int i = 0; i < orders.size(); i++) {
+                if (orders.get(i).getProduct().contains(filter)) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("MyOrdersItem.fxml"));
+                    Pane anchorPane = fxmlLoader.load();
+
+//                    MyOrderItem controller = fxmlLoader.getController();
 //                    controller.setData(orders.get(i), mainMenuController);
-//                    row++;
-//                    gridPane.add(anchorPane, 0, row);
-//                    GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
-//                }
-//                gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-//                gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-//                gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
-//                //
-//                gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-//                gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//                gridPane.setMaxHeight(Region.USE_COMPUTED_SIZE);
-//            }
-//        } catch(IOException e){
-//            e.printStackTrace();
-//        }
-//    }
-//    public void search(){
-//        updategrid(searchField.getText());
-//    }
+                    row++;
+                    gridPane.add(anchorPane, 0, row);
+                    GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
+                }
+                gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+                gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
+                //
+                gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+                gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                gridPane.setMaxHeight(Region.USE_COMPUTED_SIZE);
+            }
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void search(){
+        updategrid(searchField.getText());
+    }
 }
