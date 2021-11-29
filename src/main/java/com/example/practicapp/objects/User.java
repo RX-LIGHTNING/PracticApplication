@@ -6,6 +6,13 @@ public final class User {
     private static Boolean isadmin;
     private static int flag;
     private static int id;
+    public static int getFlag() {
+        return flag;
+    }
+
+    public static void setFlag(int flag) {
+        User.flag = flag;
+    }
 
     public int getId() {
         return id;
@@ -28,8 +35,5 @@ public final class User {
     }
     public static Boolean isAdmin() {
         return isadmin;
-    }
-    public static int getFlag() {
-        return flag;
     }
 }

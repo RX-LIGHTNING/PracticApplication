@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="797.0" style="-fx-background-color: #E5DEDE;" stylesheets="@Styles/Styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.MainMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="797.0" style="-fx-background-color: #E5DEDE; -fx-background-radius: 10px;" stylesheets="@Styles/Styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.MainMenuController">
    <children>
       <Pane prefHeight="530.0" prefWidth="162.0" style="-fx-background-color: #ffffff;">
          <children>
-            <VBox layoutX="-22.0" layoutY="40.0" prefHeight="453.0" prefWidth="184.0">
+            <VBox fx:id="NavBar" layoutX="-22.0" layoutY="40.0" prefHeight="453.0" prefWidth="184.0">
                <children>
                   <Button id="NavbarButton" fx:id="CustomerButton1" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#setProductListPane" prefHeight="50.0" prefWidth="186.0" text=" Товары" textAlignment="CENTER">
                      <opaqueInsets>
@@ -22,12 +22,27 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button id="NavbarButton" fx:id="CustomerButton12" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Настройки" textAlignment="CENTER">
+                  <Button id="NavbarButton" fx:id="ProviderButton" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#setProvidersPane" prefHeight="50.0" prefWidth="186.0" text="Поставщики" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button id="NavbarButton" fx:id="CustomerButton13" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Выйти" textAlignment="CENTER">
+                  <Button id="NavbarButton" fx:id="ProviderButton1" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text="Создать заявку" textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button id="NavbarButton" fx:id="ProviderButton2" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text="Ваши заявки" textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button id="NavbarButton" fx:id="SettingButton" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Настройки" textAlignment="CENTER">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button id="NavbarButton" fx:id="ExitButton" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="186.0" text=" Выйти" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

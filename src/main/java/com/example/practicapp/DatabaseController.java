@@ -52,6 +52,7 @@ abstract class DatabaseController {
             if (resultSet.next()) {
                 User.setLogin(resultSet.getString("login"));
                 User.setId(resultSet.getInt("id"));
+                User.setFlag(resultSet.getInt("flag"));
 //                User.setContact(resultSet.getString("contacts"));
                 preparedStatement.close();
                 result = true;
@@ -125,5 +126,23 @@ abstract class DatabaseController {
         return result;
     }
 
-    
+    public static List<Provider> getProvider(){
+        List<Provider> result = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_SELECT_QUERY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                result.add(new Provider(
+                        resultSet.getString("name"),
+                        resultSet.getInt("price"),
+                        resultSet.getString("picture"),
+                        resultSet.getString("description")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
