@@ -1,5 +1,6 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

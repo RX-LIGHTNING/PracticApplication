@@ -1,5 +1,6 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Provider;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 

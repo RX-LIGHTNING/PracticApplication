@@ -1,15 +1,12 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Product;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Calendar;
 import java.util.Objects;
 

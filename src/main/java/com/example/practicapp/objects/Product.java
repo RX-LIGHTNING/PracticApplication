@@ -1,4 +1,4 @@
-package com.example.practicapp;
+package com.example.practicapp.objects;
 
 import javafx.scene.image.Image;
 

@@ -1,7 +1,7 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Product;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 

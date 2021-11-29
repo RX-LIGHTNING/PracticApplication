@@ -8,4 +8,6 @@ module com.example.practicapp {
     requires java.sql;
     opens com.example.practicapp to javafx.fxml;
     exports com.example.practicapp;
+    exports com.example.practicapp.objects;
+    opens com.example.practicapp.objects to javafx.fxml;
 }

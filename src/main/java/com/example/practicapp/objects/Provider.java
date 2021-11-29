@@ -1,4 +1,4 @@
-package com.example.practicapp;
+package com.example.practicapp.objects;
 
 public class Provider {
     private int id;

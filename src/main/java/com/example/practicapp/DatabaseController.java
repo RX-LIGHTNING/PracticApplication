@@ -1,5 +1,8 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Order;
+import com.example.practicapp.objects.Product;
+import com.example.practicapp.objects.Provider;
 import com.example.practicapp.objects.User;
 
 import javax.crypto.SecretKeyFactory;
@@ -166,6 +169,28 @@ abstract class DatabaseController {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        return result;
+    }
+
+    public static List<Order> getOrders() {
+        List<Order> result = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_SELECT_QUERY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                result.add(new Order(
+                        resultSet.getInt("id"),
+                        resultSet.getString("organization"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getInt("productid"),
+                        resultSet.getDate("date"),
+                        resultSet.getString("contacts")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 }

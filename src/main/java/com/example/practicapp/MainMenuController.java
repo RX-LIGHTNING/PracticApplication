@@ -1,5 +1,6 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Product;
 import com.example.practicapp.objects.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,7 @@ public class MainMenuController implements Initializable {
             //
             image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
             ExitButton.setGraphic(new ImageView(image));
+            //
             image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/providers.png")));
             ProviderButton.setGraphic(new ImageView(image));
             //
@@ -89,6 +91,15 @@ public class MainMenuController implements Initializable {
         Pane anchorPane = fxmlLoader.load();
         OrderController controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this, product);
+        System.out.println(MainMenuController.this);
+        UIWorkSpace.setCenter(anchorPane);
+    }
+    public void setMyOrderPane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("MyOrders.fxml"));
+        Pane anchorPane = fxmlLoader.load();
+        MyOrderController controller = fxmlLoader.getController();
+        controller.setData(MainMenuController.this);
         System.out.println(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
     }

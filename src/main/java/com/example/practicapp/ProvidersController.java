@@ -1,5 +1,6 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Provider;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +33,6 @@ public class ProvidersController implements Initializable {
     public void updategrid(String filter){
         gridPane.getChildren().clear();
         List<Provider> providers = DatabaseController.getProvider();
-        int column = 0;
         int row = 1;
         try {
             for (int i = 0; i < providers.size(); i++) {
@@ -58,5 +58,8 @@ public class ProvidersController implements Initializable {
         } catch(IOException e){
             e.printStackTrace();
         }
+    }
+    public void search(){
+        updategrid(searchField.getText());
     }
 }
