@@ -55,13 +55,22 @@ private String productid;
 private Date date;
 private String Contact;
 
-    public Order(int id, String organization, int quantity, String product, Date date, String contacts) {
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    private String Status;
+    public Order(int id, String organization, int quantity, String product, Date date, String contacts, int status) {
         this.id = id;
         this.organzition = organization;
         this.quantity = quantity;
         this.productid = product;
         this.date = date;
         this.Contact = contacts;
-
+        this.Status = status==0?"Проверка": status ==1?"Ожидание выполнения": status == 2? "Выполнен":"N/A";
     }
 }

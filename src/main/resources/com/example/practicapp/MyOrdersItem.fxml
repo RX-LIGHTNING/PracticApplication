@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="67.0" prefWidth="587.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="67.0" prefWidth="587.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.MyOrderItem">
    <children>
-      <Text fx:id="StatusBar" layoutX="453.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="119.13671875" />
-      <Text fx:id="ProductName" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="322.13671875" />
-      <Text fx:id="quantityBar" layoutX="14.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="73.13671875" />
-      <Button layoutX="453.0" layoutY="2.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="115.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white; -fx-background-radius: 0px;" text="Отменить заказ" />
+      <Text fx:id="StatusBar" layoutX="436.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="119.13671875" />
+      <Text fx:id="ProductName" layoutX="77.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="337.13671875" />
+      <Text fx:id="quantityBar" layoutX="77.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="350.13671875" />
+      <Button layoutX="438.0" layoutY="6.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="115.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white; -fx-background-radius: 0px;" text="Отменить заказ" />
    </children>
 </Pane>

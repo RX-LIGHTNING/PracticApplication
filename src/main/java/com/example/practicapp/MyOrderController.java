@@ -36,8 +36,8 @@ public class MyOrderController{
                     fxmlLoader.setLocation(getClass().getResource("MyOrdersItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
 
-//                    MyOrderItem controller = fxmlLoader.getController();
-//                    controller.setData(orders.get(i), mainMenuController);
+                    MyOrderItem controller = fxmlLoader.getController();
+                    controller.setData(orders.get(i), mainMenuController);
                     row++;
                     gridPane.add(anchorPane, 0, row);
                     GridPane.setMargin(anchorPane, new Insets(10,1,1,1));

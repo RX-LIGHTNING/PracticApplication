@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 abstract class DatabaseController {
-    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Vkid";
+    private final static String jdbcURL = "jdbc:postgresql://192.168.100.4:5432/Vkid";
     private final static String username = "postgres";
     private final static String password = "root";
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
@@ -186,7 +186,8 @@ abstract class DatabaseController {
                         resultSet.getInt("quantity"),
                         resultSet.getString("product"),
                         resultSet.getDate("date"),
-                        resultSet.getString("contacts")
+                        resultSet.getString("contacts"),
+                        resultSet.getInt("status")
                 ));
             }
 
