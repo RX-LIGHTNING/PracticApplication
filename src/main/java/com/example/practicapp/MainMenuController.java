@@ -79,8 +79,8 @@ public class MainMenuController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("Providers.fxml"));
         Pane anchorPane = fxmlLoader.load();
-        ProductListController controller = fxmlLoader.getController();
-        controller.setData(MainMenuController.this);
+       // ProductListController controller = fxmlLoader.getController();
+      //  controller.setData(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
     }
 

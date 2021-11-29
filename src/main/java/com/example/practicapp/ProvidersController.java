@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProdersController implements Initializable {
+public class ProvidersController implements Initializable {
     @FXML
     private TextField searchField;
     @FXML
@@ -24,32 +24,28 @@ public class ProdersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        updategrid("");
     }
     public void SetData(MainMenuController parentController){
         mainMenuController = parentController;
     }
     public void updategrid(String filter){
         gridPane.getChildren().clear();
-        List<Product> products = DatabaseController.getProducts();
+        List<Provider> providers = DatabaseController.getProvider();
         int column = 0;
         int row = 1;
         try {
-            for (int i = 0; i < products.size(); i++) {
-                if (products.get(i).getName().contains(filter)) {
+            for (int i = 0; i < providers.size(); i++) {
+                if (providers.get(i).getOrgname().contains(filter)) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("ProductItem.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("ProviderItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
 
-                    ProductItemController controller = fxmlLoader.getController();
-                 //   controller.setData(products.get(i).getName(), products.get(i).getPrice(),products.get(i).getImage(), mainMenuController);
-                    if (column == 3) {
-                        column = 0;
-                        row++;
-                    }
-                    //
-                    gridPane.add(anchorPane, column++, row);
-                    GridPane.setMargin(anchorPane, new Insets(20));
+                    ProviderItemController controller = fxmlLoader.getController();
+                    controller.setData(providers.get(i), mainMenuController);
+                    row++;
+                    gridPane.add(anchorPane, 0, row);
+                    GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
                 }
                 gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
