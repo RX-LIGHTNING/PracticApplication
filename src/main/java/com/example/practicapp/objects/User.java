@@ -4,6 +4,16 @@ public final class User {
     private static String login;
     private static String password;
     private static Boolean isadmin;
+
+    public static String getOrganization() {
+        return organization;
+    }
+
+    public static void setOrganization(String organization) {
+        User.organization = organization;
+    }
+
+    private static String organization;
     private static int flag;
     private static int id;
     public static int getFlag() {

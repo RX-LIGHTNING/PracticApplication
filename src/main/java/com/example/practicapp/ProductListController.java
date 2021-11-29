@@ -45,7 +45,6 @@ public class ProductListController implements Initializable {
                     Pane anchorPane = fxmlLoader.load();
 
                     ProductItemController controller = fxmlLoader.getController();
-                    System.out.println("items "+this.mainMenuController);
                     controller.setData(products.get(i), this.mainMenuController);
 
                     if (column == 3) {

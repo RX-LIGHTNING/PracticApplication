@@ -23,6 +23,7 @@ abstract class DatabaseController {
     private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
     private static final String PROVIDER_SELECT_QUERY = "SELECT * FROM providers";
+    private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, productid, date, contacts) VALUES (?,?,?,?,?)";
     private static Connection connection;
 
     public static Connection getConnection() {
@@ -54,6 +55,7 @@ abstract class DatabaseController {
                 User.setLogin(resultSet.getString("login"));
                 User.setId(resultSet.getInt("id"));
                 User.setFlag(resultSet.getInt("flag"));
+                User.setOrganization(resultSet.getString("organisation"));
 //                User.setContact(resultSet.getString("contacts"));
                 preparedStatement.close();
                 result = true;
@@ -148,6 +150,22 @@ abstract class DatabaseController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return result;
+    }
+    public static boolean OrderInsert(int quantity,int prodid, Date date,String contact) {
+        boolean result = false;
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(ORDER_INSERT_QUERY)) {
+                preparedStatement.setString(1, User.getOrganization());
+                preparedStatement.setInt(2, quantity);
+                preparedStatement.setInt(3, prodid);
+                preparedStatement.setDate(4, date);
+                preparedStatement.setString(5,contact);
+                preparedStatement.execute();
+                result = true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         return result;
     }
 }

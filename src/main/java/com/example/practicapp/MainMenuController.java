@@ -49,13 +49,13 @@ public class MainMenuController implements Initializable {
             //
             image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
             ExitButton.setGraphic(new ImageView(image));
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
+            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/providers.png")));
             ProviderButton.setGraphic(new ImageView(image));
             //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
+            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/createticket.png")));
             ProviderButton1.setGraphic(new ImageView(image));
             //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
+            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/tickets.png")));
             ProviderButton2.setGraphic(new ImageView(image));
         if(User.getFlag() == 1){
             NavBar.getChildren().remove(ProviderButton);
@@ -73,7 +73,6 @@ public class MainMenuController implements Initializable {
         Pane anchorPane = fxmlLoader.load();
         ProductListController controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this);
-        System.out.println("MM"+MainMenuController.this);
          UIWorkSpace.setCenter(anchorPane);
     }
     public void setProvidersPane() throws IOException {
