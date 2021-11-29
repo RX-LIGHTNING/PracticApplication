@@ -15,13 +15,16 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProductListController implements Initializable {
-    private static MainMenuController mainMenuController;
     @FXML
     private GridPane gridPane;
     @FXML
     private TextField searchField;
+
+    private MainMenuController mainMenuController;
+
     public void setData(MainMenuController parentcontroller){
-        mainMenuController = parentcontroller;
+        this.mainMenuController = parentcontroller;
+        updateGrid("");
     }
 
     @Override
@@ -42,7 +45,9 @@ public class ProductListController implements Initializable {
                     Pane anchorPane = fxmlLoader.load();
 
                     ProductItemController controller = fxmlLoader.getController();
-                    controller.setData(products.get(i).getName(), products.get(i).getPrice(),products.get(i).getImage(), mainMenuController);
+                    System.out.println("items "+this.mainMenuController);
+                    controller.setData(products.get(i), this.mainMenuController);
+
                     if (column == 3) {
                         column = 0;
                         row++;

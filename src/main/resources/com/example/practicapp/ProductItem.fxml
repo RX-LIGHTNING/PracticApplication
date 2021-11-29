@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.ProductItemController">
    <children>
-      <Button layoutX="78.0" layoutY="161.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #18A4E0; -fx-background-radius: 0; -fx-text-fill: white;" text="Заказать" />
+      <Button layoutX="78.0" layoutY="161.0" mnemonicParsing="false" onAction="#orderClick" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #18A4E0; -fx-background-radius: 0; -fx-text-fill: white;" text="Заказать" />
       <Text fx:id="PriceField" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="180р/шт" textAlignment="CENTER" wrappingWidth="76.0" />
       <Text fx:id="ProductName" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ржаная булка" textAlignment="CENTER" wrappingWidth="160.0" />
       <ImageView fx:id="ProductImage" fitHeight="127.0" fitWidth="150.0" layoutX="5.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />

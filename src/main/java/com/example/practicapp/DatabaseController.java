@@ -117,7 +117,8 @@ abstract class DatabaseController {
                         resultSet.getString("name"),
                         resultSet.getInt("price"),
                         resultSet.getString("picture"),
-                        resultSet.getString("description")
+                        resultSet.getString("description"),
+                        resultSet.getInt("id")
                 ));
             }
 

@@ -26,7 +26,7 @@ public class ProvidersController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updategrid("");
     }
-    public void SetData(MainMenuController parentController){
+    public void setData(MainMenuController parentController){
         mainMenuController = parentController;
     }
     public void updategrid(String filter){

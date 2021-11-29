@@ -73,17 +73,26 @@ public class MainMenuController implements Initializable {
         Pane anchorPane = fxmlLoader.load();
         ProductListController controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this);
+        System.out.println("MM"+MainMenuController.this);
          UIWorkSpace.setCenter(anchorPane);
     }
     public void setProvidersPane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("Providers.fxml"));
         Pane anchorPane = fxmlLoader.load();
-       // ProductListController controller = fxmlLoader.getController();
-      //  controller.setData(MainMenuController.this);
+        ProvidersController controller = fxmlLoader.getController();
+        controller.setData(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
     }
-
+    public void setOrderPane(Product product) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("Order.fxml"));
+        Pane anchorPane = fxmlLoader.load();
+        OrderController controller = fxmlLoader.getController();
+        controller.setData(MainMenuController.this, product);
+        System.out.println(MainMenuController.this);
+        UIWorkSpace.setCenter(anchorPane);
+    }
 
     public void exitApplication(){
         System.exit(1);
