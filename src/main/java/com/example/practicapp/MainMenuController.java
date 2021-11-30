@@ -115,6 +115,14 @@ public class MainMenuController implements Initializable {
         controller.setData(MainMenuController.this, provider);
         UIWorkSpace.setCenter(anchorPane);
     }
+    public void setProviderRequestRegistryPane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("ProviderRequest.fxml"));
+        Pane anchorPane = fxmlLoader.load();
+        ProviderRequestController controller = fxmlLoader.getController();
+        controller.setData(MainMenuController.this);
+        UIWorkSpace.setCenter(anchorPane);
+    }
 
     public void exitApplication(){
         System.exit(1);

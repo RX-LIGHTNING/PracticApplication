@@ -27,6 +27,7 @@ abstract class DatabaseController {
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
     private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture) VALUES(?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
+    private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providers (organization,wheatflourprice,ryeflourprice,yeastprice,saltprice) VALUES(?,?,?,?,?)";
     private static final String PROVIDER_SELECT_QUERY = "SELECT * FROM providers";
     private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
     private static Connection connection;
@@ -211,5 +212,21 @@ abstract class DatabaseController {
             e.printStackTrace();
         }
         return result;
+    }
+    public static boolean ProviderRequestInsert(String text, String text1, String text2, String text3) {
+            boolean result = false;
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_REQUEST_INSERT_QUERY)) {
+                preparedStatement.setString(1, User.getOrganization());
+                preparedStatement.setInt(2, Integer.parseInt(text2));
+                preparedStatement.setInt(3, Integer.parseInt(text));
+                preparedStatement.setInt(4, Integer.parseInt(text3));
+                preparedStatement.setInt(5, Integer.parseInt(text1));
+                preparedStatement.execute();
+                result = true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return result;
     }
 }
