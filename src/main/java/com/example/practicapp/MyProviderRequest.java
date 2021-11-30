@@ -1,9 +1,9 @@
 package com.example.practicapp;
 
+import com.example.practicapp.objects.Product;
 import com.example.practicapp.objects.Provider;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -15,30 +15,30 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProvidersController {
-    @FXML
-    private TextField searchField;
+public class MyProviderRequest {
     @FXML
     private GridPane gridPane;
+    @FXML
+    private TextField searchField;
 
-    MainMenuController mainMenuController;
+    private MainMenuController mainMenuController;
 
-    public void setData(MainMenuController parentController){
-        mainMenuController = parentController;
-        updategrid("");
+    public void setData(MainMenuController parentcontroller){
+        this.mainMenuController = parentcontroller;
+        updateGrid("");
     }
-    public void updategrid(String filter){
+    public void updateGrid(String filter){
         gridPane.getChildren().clear();
         List<Provider> providers = DatabaseController.getProvider();
         int row = 1;
         try {
             for (int i = 0; i < providers.size(); i++) {
-                if (providers.get(i).getOrgname().contains(filter) && providers.get(i).getStatus()!=1) {
+                if (providers.get(i).getOrgname().contains(filter)&&providers.get(i).getStatus()==0) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("ProviderItem.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("ProviderRequestItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
 
-                    ProviderItemController controller = fxmlLoader.getController();
+                    ProviderRequestItemController controller = fxmlLoader.getController();
                     controller.setData(providers.get(i), mainMenuController);
                     row++;
                     gridPane.add(anchorPane, 0, row);
@@ -57,6 +57,6 @@ public class ProvidersController {
         }
     }
     public void search(){
-        updategrid(searchField.getText());
+        updateGrid(searchField.getText());
     }
 }

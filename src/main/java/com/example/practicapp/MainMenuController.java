@@ -123,7 +123,14 @@ public class MainMenuController implements Initializable {
         controller.setData(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
     }
-
+    public void setMyProviderRequestPane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("MyProviderRequest.fxml"));
+        Pane anchorPane = fxmlLoader.load();
+        MyProviderRequest controller = fxmlLoader.getController();
+        controller.setData(MainMenuController.this);
+        UIWorkSpace.setCenter(anchorPane);
+    }
     public void exitApplication(){
         System.exit(1);
     }
