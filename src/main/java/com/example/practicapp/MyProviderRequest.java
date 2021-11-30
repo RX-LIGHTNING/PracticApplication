@@ -2,6 +2,7 @@ package com.example.practicapp;
 
 import com.example.practicapp.objects.Product;
 import com.example.practicapp.objects.Provider;
+import com.example.practicapp.objects.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -13,6 +14,7 @@ import javafx.scene.layout.Region;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MyProviderRequest {
@@ -25,15 +27,26 @@ public class MyProviderRequest {
 
     public void setData(MainMenuController parentcontroller){
         this.mainMenuController = parentcontroller;
-        updateGrid("");
+        updateGrid(-2);
     }
-    public void updateGrid(String filter){
+    public void updateGrid(int arg){
         gridPane.getChildren().clear();
         List<Provider> providers = DatabaseController.getProvider();
         int row = 1;
         try {
             for (int i = 0; i < providers.size(); i++) {
-                if (providers.get(i).getOrgname().contains(filter)&&providers.get(i).getStatus()!=2) {
+                if (providers.get(i).getStatus()==arg && arg!=2 && Objects.equals(User.getOrganization(), providers.get(i).getOrgname())) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("ProviderRequestItem.fxml"));
+                    Pane anchorPane = fxmlLoader.load();
+
+                    ProviderRequestItemController controller = fxmlLoader.getController();
+                    controller.setData(providers.get(i), mainMenuController, MyProviderRequest.this);
+                    row++;
+                    gridPane.add(anchorPane, 0, row);
+                    GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
+                }
+                if(arg==-2 && Objects.equals(User.getOrganization(), providers.get(i).getOrgname())){
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProviderRequestItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
@@ -56,7 +69,13 @@ public class MyProviderRequest {
             e.printStackTrace();
         }
     }
-    public void search(){
-        updateGrid(searchField.getText());
+    public void showOnlyCanceled(){
+        updateGrid(-1);
+    }
+    public void showOnlyVerifying(){
+        updateGrid(0);
+    }
+    public void clearFilter(){
+        updateGrid(-2);
     }
 }

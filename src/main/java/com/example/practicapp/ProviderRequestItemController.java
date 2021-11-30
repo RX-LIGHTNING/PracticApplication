@@ -29,6 +29,6 @@ public class ProviderRequestItemController {
     }
     public void cancelRequest() throws IOException {
         DatabaseController.ProviderRequestCancel(provider.getId());
-        myProviderRequest.updateGrid("");
+        myProviderRequest.updateGrid(-2);
     }
 }
