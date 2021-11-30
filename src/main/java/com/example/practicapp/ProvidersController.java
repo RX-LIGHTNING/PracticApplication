@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProvidersController implements Initializable {
+public class ProvidersController {
     @FXML
     private TextField searchField;
     @FXML
@@ -23,12 +23,9 @@ public class ProvidersController implements Initializable {
 
     MainMenuController mainMenuController;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        updategrid("");
-    }
     public void setData(MainMenuController parentController){
         mainMenuController = parentController;
+        updategrid("");
     }
     public void updategrid(String filter){
         gridPane.getChildren().clear();

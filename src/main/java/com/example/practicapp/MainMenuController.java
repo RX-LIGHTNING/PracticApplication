@@ -1,6 +1,7 @@
 package com.example.practicapp;
 
 import com.example.practicapp.objects.Product;
+import com.example.practicapp.objects.Provider;
 import com.example.practicapp.objects.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -99,6 +103,16 @@ public class MainMenuController implements Initializable {
         Pane anchorPane = fxmlLoader.load();
         MyOrderController controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this);
+        UIWorkSpace.setCenter(anchorPane);
+//        File fi = new File("1.jpg");
+//        byte[] fileContent = Files.readAllBytes(fi.toPath());
+    }
+    public void setProviderMorePane(Provider provider) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("ProviderMore.fxml"));
+        Pane anchorPane = fxmlLoader.load();
+        ProviderMoreController controller = fxmlLoader.getController();
+        controller.setData(MainMenuController.this, provider);
         UIWorkSpace.setCenter(anchorPane);
     }
 

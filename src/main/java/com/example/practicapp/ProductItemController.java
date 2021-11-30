@@ -21,9 +21,9 @@ public class ProductItemController {
         this.price = product.getPrice();
         this.mainMenuController = mainMenuController;
         this.product = product;
-        //ProductImage.setImage(image);
         ProductName.setText(name);
         PriceField.setText(price+" руб/шт");
+        ProductImage.setImage(product.getImage());
     }
     public void orderClick() throws IOException {
         mainMenuController.setOrderPane(product);

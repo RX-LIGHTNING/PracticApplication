@@ -2,6 +2,10 @@ package com.example.practicapp.objects;
 
 import javafx.scene.image.Image;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Product {
     private String name;
     private int price;
@@ -35,10 +39,15 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Product(String name, int price, String image, String description, int id) {
+    private Image getImageFromBytes(byte[] rs) {
+        Image img = new Image(new ByteArrayInputStream(rs));
+        return img;
+    }
+
+    public Product(String name, int price, byte[] image, String description, int id) {
         this.name = name;
         this.price = price;
-        //this.image = new Image(String.valueOf(image));
+        this.image = getImageFromBytes(image);
         this.description = description;
         this.id =id;
     }

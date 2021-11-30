@@ -4,6 +4,8 @@ import com.example.practicapp.objects.Provider;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+
 public class ProviderItemController {
     @FXML
     private Text OrgName;
@@ -19,5 +21,8 @@ public class ProviderItemController {
         OrgName.setText(provider.getOrgname());
         raw.setText("Соль: "+provider.getSaltprice()+" руб/кг");
         raw1.setText("Пшеничная мука: "+provider.getWheatflourprice()+" руб/кг");
+    }
+    public void setProviderMorePane() throws IOException {
+        parentController.setProviderMorePane(provider);
     }
 }

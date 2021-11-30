@@ -18,13 +18,14 @@ import java.util.List;
 import java.util.Objects;
 
 abstract class DatabaseController {
-    private final static String jdbcURL = "jdbc:postgresql://192.168.100.4:5432/Vkid";
+    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Vkid";
     private final static String username = "postgres";
     private final static String password = "root";
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
     private static final String USER_FIND_QUERY = "SELECT * FROM users WHERE login = ?";
     private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
+    private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture) VALUES(?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
     private static final String PROVIDER_SELECT_QUERY = "SELECT * FROM providers";
     private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
@@ -122,7 +123,7 @@ abstract class DatabaseController {
                 result.add(new Product(
                         resultSet.getString("name"),
                         resultSet.getInt("price"),
-                        resultSet.getString("picture"),
+                        resultSet.getBytes("picture"),
                         resultSet.getString("description"),
                         resultSet.getInt("id")
                 ));
@@ -191,6 +192,21 @@ abstract class DatabaseController {
                 ));
             }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean ProductInsert(String name,int price, String description,byte[] file) {
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_INSERT_QUERY)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, description);
+            preparedStatement.setInt(3, price);
+            preparedStatement.setBytes(4, file);
+            preparedStatement.execute();
+            result = true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
