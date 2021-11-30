@@ -33,13 +33,13 @@ public class MyProviderRequest {
         int row = 1;
         try {
             for (int i = 0; i < providers.size(); i++) {
-                if (providers.get(i).getOrgname().contains(filter)&&providers.get(i).getStatus()==0) {
+                if (providers.get(i).getOrgname().contains(filter)&&providers.get(i).getStatus()!=2) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProviderRequestItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
 
                     ProviderRequestItemController controller = fxmlLoader.getController();
-                    controller.setData(providers.get(i), mainMenuController);
+                    controller.setData(providers.get(i), mainMenuController, MyProviderRequest.this);
                     row++;
                     gridPane.add(anchorPane, 0, row);
                     GridPane.setMargin(anchorPane, new Insets(10,1,1,1));

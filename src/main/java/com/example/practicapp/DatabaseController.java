@@ -30,6 +30,7 @@ abstract class DatabaseController {
     private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providers (organization,wheatflourprice,ryeflourprice,yeastprice,saltprice) VALUES(?,?,?,?,?)";
     private static final String PROVIDER_SELECT_QUERY = "SELECT * FROM providers";
     private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
+    private static final String PROVIDER_REQUEST_UPDATE_QUERY = "UPDATE providers set status = -1 where id = ?";
     private static Connection connection;
 
     public static Connection getConnection() {
@@ -228,5 +229,17 @@ abstract class DatabaseController {
                 e.printStackTrace();
             }
             return result;
+    }
+    public static boolean ProviderRequestCancel(int id) {
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_REQUEST_UPDATE_QUERY)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

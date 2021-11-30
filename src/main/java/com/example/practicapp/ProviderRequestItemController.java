@@ -17,15 +17,18 @@ public class ProviderRequestItemController {
     private Text status;
     MainMenuController parentController;
     Provider provider;
-    public void setData(Provider provider, MainMenuController mainMenuController) {
+    MyProviderRequest myProviderRequest;
+    public void setData(Provider provider, MainMenuController mainMenuController, MyProviderRequest myProviderRequest) {
         parentController = mainMenuController;
         this.provider = provider;
+        this.myProviderRequest = myProviderRequest;
         OrgName.setText(provider.getOrgname());
         raw.setText("Соль: "+provider.getSaltprice()+" руб/кг");
         raw1.setText("Пшеничная мука: "+provider.getWheatflourprice()+" руб/кг");
         status.setText("Статус: "+provider.getStatus());
     }
     public void cancelRequest() throws IOException {
-
+        DatabaseController.ProviderRequestCancel(provider.getId());
+        myProviderRequest.updateGrid("");
     }
 }
