@@ -1,7 +1,6 @@
 package com.example.practicapp;
 
 import com.example.practicapp.objects.Product;
-import com.example.practicapp.objects.Provider;
 import com.example.practicapp.objects.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -107,12 +106,12 @@ public class MainMenuController implements Initializable {
 //        File fi = new File("1.jpg");
 //        byte[] fileContent = Files.readAllBytes(fi.toPath());
     }
-    public void setProviderMorePane(Provider provider) throws IOException {
+    public void setProviderMorePane(int id) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("ProviderMore.fxml"));
         Pane anchorPane = fxmlLoader.load();
         ProviderMoreController controller = fxmlLoader.getController();
-        controller.setData(MainMenuController.this, provider);
+        controller.setData(MainMenuController.this, id);
         UIWorkSpace.setCenter(anchorPane);
     }
     public void setProviderRequestRegistryPane() throws IOException {
@@ -130,6 +129,10 @@ public class MainMenuController implements Initializable {
         MyProviderRequest controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
+    }
+    public void exitFromAccount() throws IOException {
+        User.exit();
+        ApplicationCoreController.ShowSingInMenu();
     }
     public void exitApplication(){
         System.exit(1);

@@ -31,11 +31,11 @@ public class MyProviderRequest {
     }
     public void updateGrid(int arg){
         gridPane.getChildren().clear();
-        List<Provider> providers = DatabaseController.getProvider();
+        List<Provider> providers = DatabaseController.getProviders();
         int row = 1;
         try {
             for (int i = 0; i < providers.size(); i++) {
-                if (providers.get(i).getStatus()==arg && arg!=2 && Objects.equals(User.getOrganization(), providers.get(i).getOrgname())) {
+
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProviderRequestItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
@@ -45,18 +45,8 @@ public class MyProviderRequest {
                     row++;
                     gridPane.add(anchorPane, 0, row);
                     GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
-                }
-                if(arg==-2 && Objects.equals(User.getOrganization(), providers.get(i).getOrgname())){
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("ProviderRequestItem.fxml"));
-                    Pane anchorPane = fxmlLoader.load();
 
-                    ProviderRequestItemController controller = fxmlLoader.getController();
-                    controller.setData(providers.get(i), mainMenuController, MyProviderRequest.this);
-                    row++;
-                    gridPane.add(anchorPane, 0, row);
-                    GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
-                }
+
                 gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);

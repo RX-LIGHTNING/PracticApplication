@@ -23,9 +23,7 @@ public class ProviderRequestItemController {
         this.provider = provider;
         this.myProviderRequest = myProviderRequest;
         OrgName.setText(provider.getOrgname());
-        raw.setText("Соль: "+provider.getSaltprice()+" руб/кг");
-        raw1.setText("Пшеничная мука: "+provider.getWheatflourprice()+" руб/кг");
-        status.setText("Статус: "+provider.getStatus());
+        raw.setText(provider.getIngredientname()+": "+ provider.getPrice() +"руб/кг");
     }
     public void cancelRequest() throws IOException {
         DatabaseController.ProviderRequestCancel(provider.getId());

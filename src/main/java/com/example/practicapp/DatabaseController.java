@@ -1,9 +1,6 @@
 package com.example.practicapp;
 
-import com.example.practicapp.objects.Order;
-import com.example.practicapp.objects.Product;
-import com.example.practicapp.objects.Provider;
-import com.example.practicapp.objects.User;
+import com.example.practicapp.objects.*;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -27,11 +24,18 @@ abstract class DatabaseController {
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
     private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture) VALUES(?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
-    private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providers (organization,wheatflourprice,ryeflourprice,yeastprice,saltprice) VALUES(?,?,?,?,?)";
-    private static final String PROVIDER_SELECT_QUERY = "SELECT * FROM providers";
+    private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providersingredient (provider_id,ingredient_id,price) VALUES(?,?,?)";
+    private static final String PROVIDER_SELECT_QUERY = "SELECT price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
+            "FROM ingredients\n" +
+            "INNER JOIN providersingredient ON ing_id = ingredient_id\n" +
+            "INNER JOIN users ON provider_id = id where users.flag>2";
+    private static final String PROVIDER_SELECT_BY_ID_QUERY = "SELECT price, provider_id, ingredient_id, ing_id\n" +
+            "FROM ingredients\n" +
+            "INNER JOIN providersingredient ON ing_id = ingredient_id";
     private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
     private static final String PROVIDER_REQUEST_UPDATE_QUERY = "UPDATE providers set status = -1 where id = ?";
     private static Connection connection;
+    private static final String INGREDIENT_SELECT_QUERY = "SELECT * FROM ingredients";
 
     public static Connection getConnection() {
         try {
@@ -63,7 +67,8 @@ abstract class DatabaseController {
                 User.setId(resultSet.getInt("id"));
                 User.setFlag(resultSet.getInt("flag"));
                 User.setOrganization(resultSet.getString("organisation"));
-//                User.setContact(resultSet.getString("contacts"));
+                User.setIsadmin(resultSet.getBoolean("isadmin"));
+                User.setContact(resultSet.getString("mail"));
                 preparedStatement.close();
                 result = true;
             }
@@ -136,21 +141,16 @@ abstract class DatabaseController {
         }
         return result;
     }
-
-    public static List<Provider> getProvider(){
-        List<Provider> result = new ArrayList<>();
+    public static List<Ingredient> getIngredients(){
+        List<Ingredient> result = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_SELECT_QUERY)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(INGREDIENT_SELECT_QUERY)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
-               result.add(new Provider(
-                        resultSet.getInt("id"),
-                        resultSet.getString("organization"),
-                        resultSet.getInt("wheatflourprice"),
-                        resultSet.getInt("saltprice"),
-                        resultSet.getInt("ryeflourprice"),
-                       resultSet.getInt("yeastprice"),
-                       resultSet.getInt("status")
+                result.add(new Ingredient(
+                                //resultSet.getString("provider"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("ing_id")
                 ));
             }
 
@@ -158,6 +158,27 @@ abstract class DatabaseController {
             e.printStackTrace();
         }
         return result;
+    }
+    public static List<Provider> getProviders(){
+        List<Provider> result = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_SELECT_QUERY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+
+                result.add( new Provider(
+                        resultSet.getInt("provider_id"),
+                        resultSet.getString("organisation"),
+                        resultSet.getInt("price"),
+                        resultSet.getString("name")
+                       ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+
     }
     public static boolean OrderInsert(int quantity,String prod, Date date,String contact) {
         boolean result = false;
@@ -214,15 +235,13 @@ abstract class DatabaseController {
         }
         return result;
     }
-    public static boolean ProviderRequestInsert(String text, String text1, String text2, String text3) {
+    public static boolean InsertIngredientPrice(int ing_id, int price) {
             boolean result = false;
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_REQUEST_INSERT_QUERY)) {
-                preparedStatement.setString(1, User.getOrganization());
-                preparedStatement.setInt(2, Integer.parseInt(text2));
-                preparedStatement.setInt(3, Integer.parseInt(text));
-                preparedStatement.setInt(4, Integer.parseInt(text3));
-                preparedStatement.setInt(5, Integer.parseInt(text1));
+                preparedStatement.setInt(1, User.getId());
+                preparedStatement.setInt(2, ing_id);
+                preparedStatement.setInt(3, price);
                 preparedStatement.execute();
                 result = true;
             } catch (SQLException e) {

@@ -75,7 +75,7 @@ public class ApplicationCoreController extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(ApplicationCoreController.class.getResource("MainMenu.fxml")));
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(MouseEvent event) { 
                 xOffset = event.getSceneX();
                 yOffset = event.getSceneY();
             }

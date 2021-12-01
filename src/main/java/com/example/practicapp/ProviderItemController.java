@@ -19,10 +19,9 @@ public class ProviderItemController {
         parentController = mainMenuController;
         this.provider = provider;
         OrgName.setText(provider.getOrgname());
-        raw.setText("Соль: "+provider.getSaltprice()+" руб/кг");
-        raw1.setText("Пшеничная мука: "+provider.getWheatflourprice()+" руб/кг");
+        raw.setText(provider.getIngredientname()+": "+ provider.getPrice() +"руб/кг");
     }
     public void setProviderMorePane() throws IOException {
-        parentController.setProviderMorePane(provider);
+        parentController.setProviderMorePane(1);
     }
 }

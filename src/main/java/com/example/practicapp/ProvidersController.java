@@ -29,11 +29,10 @@ public class ProvidersController {
     }
     public void updategrid(String filter){
         gridPane.getChildren().clear();
-        List<Provider> providers = DatabaseController.getProvider();
+        List<Provider> providers = DatabaseController.getProviders();
         int row = 1;
         try {
             for (int i = 0; i < providers.size(); i++) {
-                if (providers.get(i).getOrgname().contains(filter) && providers.get(i).getStatus()!=1) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProviderItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
@@ -43,7 +42,6 @@ public class ProvidersController {
                     row++;
                     gridPane.add(anchorPane, 0, row);
                     GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
-                }
                 gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
