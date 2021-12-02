@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
@@ -18,7 +19,11 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <TextField fx:id="searchField" layoutX="471.0" layoutY="20.0" onAction="#search" prefHeight="26.0" prefWidth="88.0" promptText="Поиск" style="-fx-background-color: #C4C4C4; -fx-background-radius: 10px;" />
-      <Button layoutX="545.0" layoutY="20.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" style="-fx-background-color: #18A4E0; -fx-background-radius: 0px 10px 10px 0px;" text="найти" textAlignment="CENTER" textFill="WHITE" />
+      <TextField fx:id="searchField" layoutX="471.0" layoutY="20.0" onAction="#search" onInputMethodTextChanged="#search" onKeyPressed="#search" prefHeight="26.0" prefWidth="88.0" promptText="Поиск" style="-fx-background-color: #C4C4C4; -fx-background-radius: 10px;" />
+      <Button layoutX="545.0" layoutY="20.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="48.0" style="-fx-background-color: #18A4E0; -fx-background-radius: 0px 10px 10px 0px;" text="найти" textAlignment="CENTER" textFill="WHITE" />
+      <ComboBox fx:id="ingredientBox" layoutX="304.0" layoutY="20.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #18A4E0;" />
+      <Button layoutX="177.0" layoutY="20.0" mnemonicParsing="false" onAction="#sortDown" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="По убыванию" textAlignment="CENTER" />
+      <Button layoutX="62.0" layoutY="20.0" mnemonicParsing="false" onAction="#sortUp" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="По возрастанию" />
+      <Button layoutY="20.0" mnemonicParsing="false" onAction="#searchReset" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="сброс" />
    </children>
 </Pane>

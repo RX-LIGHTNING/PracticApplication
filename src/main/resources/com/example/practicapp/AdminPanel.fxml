@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Товары" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Товары" />
+      <Button layoutX="125.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Рецепты" />
+      <Button layoutX="235.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Информация" />
+      <Button layoutX="345.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Поставщики" />
+      <Button layoutX="455.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Статистика" />
+      <BorderPane fx:id="AdminPane" layoutX="7.0" layoutY="52.0" prefHeight="450.0" prefWidth="570.0" />
    </children>
 </Pane>

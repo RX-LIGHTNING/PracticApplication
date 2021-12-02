@@ -1,6 +1,6 @@
 package com.example.practicapp.objects;
 
-public class Provider {
+public class Provider implements Comparable<Provider> {
     private int id;
     private String orgname;
     private int price;
@@ -37,7 +37,10 @@ public class Provider {
     public void setIngredientname(String ingredientname) {
         this.ingredientname = ingredientname;
     }
-
+    @Override
+    public int compareTo(Provider o) {
+        return this.getPrice() - o.getPrice();
+    }
 
 
     public Provider(int id,int ing_id, String orgname, int price, String ingredientname) {
