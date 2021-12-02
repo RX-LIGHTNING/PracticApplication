@@ -52,7 +52,9 @@ public class ProviderRequestController {
         }
         public void submitRequest() throws IOException {
             for (int i = 0; i < temp.size(); i++) {
-                DatabaseController.InsertIngredientPrice(temp.get(i).getIng_id(),Integer.parseInt(tempFields[i].getText()));
+                if(!Objects.equals(tempFields[i].getText(), "")) {
+                    DatabaseController.InsertIngredientPrice(temp.get(i).getIng_id(), Integer.parseInt(tempFields[i].getText()));
+                }
             }
         }
 }

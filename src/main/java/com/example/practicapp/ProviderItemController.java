@@ -22,6 +22,6 @@ public class ProviderItemController {
         raw.setText(provider.getIngredientname()+": "+ provider.getPrice() +"руб/кг");
     }
     public void setProviderMorePane() throws IOException {
-        parentController.setProviderMorePane(1);
+        parentController.setProviderMorePane(provider.getId());
     }
 }

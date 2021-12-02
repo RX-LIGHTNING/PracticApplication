@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 abstract class DatabaseController {
-    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Vkid";
+    private final static String jdbcURL = "jdbc:postgresql://192.168.100.4:5432/Vkid";
     private final static String username = "postgres";
     private final static String password = "root";
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
@@ -29,11 +29,12 @@ abstract class DatabaseController {
             "FROM ingredients\n" +
             "INNER JOIN providersingredient ON ing_id = ingredient_id\n" +
             "INNER JOIN users ON provider_id = id where users.flag>2";
-    private static final String PROVIDER_SELECT_BY_ID_QUERY = "SELECT price, provider_id, ingredient_id, ing_id\n" +
+    private static final String PROVIDER_SELECT_BY_ID_QUERY = "SELECT price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
             "FROM ingredients\n" +
-            "INNER JOIN providersingredient ON ing_id = ingredient_id";
+            " INNER JOIN providersingredient ON ing_id = ingredient_id\n" +
+            " INNER JOIN users ON provider_id = id where users.flag>2 and providersingredient.provider_id = ?";
     private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
-    private static final String PROVIDER_REQUEST_UPDATE_QUERY = "UPDATE providers set status = -1 where id = ?";
+    private static final String PROVIDER_REQUEST_DELETE_QUERY = "DELETE FROM providersingredient WHERE provider_id = ? AND ingredient_id = ?";
     private static Connection connection;
     private static final String INGREDIENT_SELECT_QUERY = "SELECT * FROM ingredients";
 
@@ -165,13 +166,35 @@ abstract class DatabaseController {
              PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_SELECT_QUERY)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
-
                 result.add( new Provider(
                         resultSet.getInt("provider_id"),
+                        resultSet.getInt("ingredient_id"),
                         resultSet.getString("organisation"),
                         resultSet.getInt("price"),
                         resultSet.getString("name")
                        ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+    public static List<Provider> getProvidersById(int id){
+        List<Provider> result = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_SELECT_BY_ID_QUERY)) {
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                result.add( new Provider(
+                        resultSet.getInt("provider_id"),
+                        resultSet.getInt("ingredient_id"),
+                        resultSet.getString("organisation"),
+                        resultSet.getInt("price"),
+                        resultSet.getString("name")
+                ));
             }
 
         } catch (SQLException e) {
@@ -249,11 +272,12 @@ abstract class DatabaseController {
             }
             return result;
     }
-    public static boolean ProviderRequestCancel(int id) {
+    public static boolean ProviderRequestCancel(int provid,int ingid) {
         boolean result = false;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_REQUEST_UPDATE_QUERY)) {
-            preparedStatement.setInt(1, id);
+             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_REQUEST_DELETE_QUERY)) {
+            preparedStatement.setInt(1, provid);
+            preparedStatement.setInt(2, ingid);
             preparedStatement.execute();
             result = true;
         } catch (SQLException e) {

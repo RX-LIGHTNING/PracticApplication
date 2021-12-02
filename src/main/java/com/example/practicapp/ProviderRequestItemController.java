@@ -26,7 +26,8 @@ public class ProviderRequestItemController {
         raw.setText(provider.getIngredientname()+": "+ provider.getPrice() +"руб/кг");
     }
     public void cancelRequest() throws IOException {
-        DatabaseController.ProviderRequestCancel(provider.getId());
-        myProviderRequest.updateGrid(-2);
+        DatabaseController.ProviderRequestCancel(provider.getId(), provider.getIng_id());
+        System.out.println(provider.getId()+" "+provider.getIng_id());
+        myProviderRequest.updateGrid("");
     }
 }

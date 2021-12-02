@@ -27,14 +27,14 @@ public class MyProviderRequest {
 
     public void setData(MainMenuController parentcontroller){
         this.mainMenuController = parentcontroller;
-        updateGrid(-2);
+        updateGrid("");
     }
-    public void updateGrid(int arg){
+    public void updateGrid(String filter){
         gridPane.getChildren().clear();
-        List<Provider> providers = DatabaseController.getProviders();
+        List<Provider> providers = DatabaseController.getProvidersById(User.getId());
         int row = 1;
-        try {
-            for (int i = 0; i < providers.size(); i++) {
+            try {
+                for (int i = 0; i < providers.size(); i++) {
 
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProviderRequestItem.fxml"));
@@ -44,28 +44,28 @@ public class MyProviderRequest {
                     controller.setData(providers.get(i), mainMenuController, MyProviderRequest.this);
                     row++;
                     gridPane.add(anchorPane, 0, row);
-                    GridPane.setMargin(anchorPane, new Insets(10,1,1,1));
+                    GridPane.setMargin(anchorPane, new Insets(10, 1, 1, 1));
 
 
-                gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-                gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
-                //
-                gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-                gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                gridPane.setMaxHeight(Region.USE_COMPUTED_SIZE);
+                    gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+                    gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                    gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
+                    //
+                    gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+                    gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                    gridPane.setMaxHeight(Region.USE_COMPUTED_SIZE);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch(IOException e){
-            e.printStackTrace();
         }
-    }
     public void showOnlyCanceled(){
-        updateGrid(-1);
+        updateGrid("");
     }
     public void showOnlyVerifying(){
-        updateGrid(0);
+        updateGrid("");
     }
     public void clearFilter(){
-        updateGrid(-2);
+        updateGrid("");
     }
 }
