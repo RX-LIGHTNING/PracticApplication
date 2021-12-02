@@ -13,7 +13,14 @@ public class Product {
     private String description;
     private int id;
     private int recipe;
+    private byte[] imageBytes;
 
+    public byte[] getImageBytes() {
+        return imageBytes;
+    }
+    public void setImageBytes(byte[] imageBytes) {
+        this.imageBytes = imageBytes;
+    }
     public int getRecipe() {
         return recipe;
     }
@@ -54,6 +61,7 @@ public class Product {
     public Product(String name, int price, byte[] image, String description, int id, int recipe) {
         this.name = name;
         this.price = price;
+        this.imageBytes = image;
         this.image = getImageFromBytes(image);
         this.description = description;
         this.id =id;

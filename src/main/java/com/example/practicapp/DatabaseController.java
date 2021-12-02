@@ -25,6 +25,7 @@ abstract class DatabaseController {
     private static final String USER_FIND_QUERY = "SELECT * FROM users WHERE login = ?";
     private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
+    private static final String PRODUCT_UPDATE_QUERY = "UPDATE products set name = ?, description = ?, price = ?, picture = ?, recipe = ? WHERE id = ?";
     private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture,recipe) VALUES(?,?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
     private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providersingredient (provider_id,ingredient_id,price) VALUES(?,?,?)";
@@ -264,6 +265,25 @@ abstract class DatabaseController {
         }
         return result;
     }
+
+    public static boolean ProductUpdate(String name, int price, String description, byte[] file, int recipe, int id) throws IOException {
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_UPDATE_QUERY)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, description);
+            preparedStatement.setInt(3, price);
+            preparedStatement.setBytes(4, file);
+            preparedStatement.setInt(5, recipe);
+            preparedStatement.setInt(6, id);
+            preparedStatement.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static boolean InsertIngredientPrice(int ing_id, int price) {
             boolean result = false;
             try (Connection connection = getConnection();

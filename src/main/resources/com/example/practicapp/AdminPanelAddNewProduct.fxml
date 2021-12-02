@@ -20,5 +20,7 @@
       <TextField fx:id="priceField" layoutX="145.0" layoutY="125.0" />
       <TextArea fx:id="prodDescription" layoutX="145.0" layoutY="174.0" prefHeight="141.0" prefWidth="149.0" />
       <Text layoutX="14.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите цену продукта" wrappingWidth="148.5078125" />
+      <Button layoutX="306.0" layoutY="125.0" mnemonicParsing="false" text="Рекомендовать" />
+      <Text fx:id="recommend" layoutX="415.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </Pane>

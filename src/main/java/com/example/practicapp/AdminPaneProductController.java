@@ -66,6 +66,6 @@ public class AdminPaneProductController {
         updateGrid(searchField.getText());
     }
     public void addNewProduct() throws IOException {
-        mainMenuController.showProductAdd();
+        mainMenuController.showProductAdd(null);
     }
 }

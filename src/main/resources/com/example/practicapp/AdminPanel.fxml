@@ -8,7 +8,7 @@
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showProductsPane" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Товары" />
       <Button layoutX="125.0" layoutY="14.0" mnemonicParsing="false" onAction="#showRecipesPane" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Рецепты" />
-      <Button layoutX="235.0" layoutY="14.0" mnemonicParsing="false" onAction="#showInformationPane" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Информация" />
+      <Button layoutX="235.0" layoutY="14.0" mnemonicParsing="false" onAction="#showInformationPane" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Себестоимость" />
       <Button layoutX="356.0" layoutY="14.0" mnemonicParsing="false" onAction="#showProvidersPane" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Поставщики" />
       <Button layoutX="468.0" layoutY="14.0" mnemonicParsing="false" onAction="#showStatisticsPane" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Статистика" />
       <BorderPane fx:id="AdminPane" layoutX="7.0" layoutY="52.0" prefHeight="450.0" prefWidth="570.0" />

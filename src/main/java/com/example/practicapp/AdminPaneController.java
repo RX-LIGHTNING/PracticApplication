@@ -54,12 +54,20 @@ public class AdminPaneController {
         //  controller.setData(AdminPaneController.this);
         AdminPane.setCenter(anchorPane);
     }
-    public void showProductAdd() throws IOException {
+    public void showProductAdd(Product mode) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("AdminPanelAddNewProduct.fxml"));
         Pane anchorPane = fxmlLoader.load();
         AdminPaneAddNewProductController controller = fxmlLoader.getController();
-        controller.setData(AdminPaneController.this, 1);
+        controller.setData(AdminPaneController.this, mode);
+        AdminPane.setCenter(anchorPane);
+    }
+    public void showProductModify(Product mode) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("AdminPanelAddNewProduct.fxml"));
+        Pane anchorPane = fxmlLoader.load();
+        AdminPaneAddNewProductController controller = fxmlLoader.getController();
+        controller.setData(AdminPaneController.this, mode);
         AdminPane.setCenter(anchorPane);
     }
     public void setData(MainMenuController  mainMenuController) {

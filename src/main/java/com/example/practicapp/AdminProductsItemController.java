@@ -28,7 +28,7 @@ public class AdminProductsItemController {
         ProductImage.setImage(product.getImage());
     }
     public void moreClick() throws IOException {
-       // mainMenuController.setOrderPane(product);
+        mainMenuController.showProductModify(product);
     }
 
 }
