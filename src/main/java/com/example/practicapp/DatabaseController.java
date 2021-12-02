@@ -4,6 +4,9 @@ import com.example.practicapp.objects.*;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -22,7 +25,7 @@ abstract class DatabaseController {
     private static final String USER_FIND_QUERY = "SELECT * FROM users WHERE login = ?";
     private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
-    private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture) VALUES(?,?,?,?)";
+    private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture,recipe) VALUES(?,?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
     private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providersingredient (provider_id,ingredient_id,price) VALUES(?,?,?)";
     private static final String PROVIDER_SELECT_QUERY = "SELECT price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
@@ -133,7 +136,8 @@ abstract class DatabaseController {
                         resultSet.getInt("price"),
                         resultSet.getBytes("picture"),
                         resultSet.getString("description"),
-                        resultSet.getInt("id")
+                        resultSet.getInt("id"),
+                        resultSet.getInt("recipe")
                 ));
             }
 
@@ -243,14 +247,16 @@ abstract class DatabaseController {
         }
         return result;
     }
-    public static boolean ProductInsert(String name,int price, String description,byte[] file) {
+    public static boolean ProductInsert(String name, int price, String description, File temp, int recipe) throws IOException {
         boolean result = false;
+        byte[] file = Files.readAllBytes(temp.toPath());
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_INSERT_QUERY)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, description);
             preparedStatement.setInt(3, price);
             preparedStatement.setBytes(4, file);
+            preparedStatement.setInt(5, recipe);
             preparedStatement.execute();
             result = true;
         } catch (SQLException e) {

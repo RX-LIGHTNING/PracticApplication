@@ -12,11 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -48,8 +45,13 @@ public class MainMenuController implements Initializable {
             image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/order.png")));
             CustomerButton11.setGraphic(new ImageView(image));
             //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/settings.png")));
-            SettingButton.setGraphic(new ImageView(image));
+            if(User.isAdmin()) {
+                image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/settings.png")));
+                SettingButton.setGraphic(new ImageView(image));
+            }
+            else {
+                NavBar.getChildren().remove(SettingButton);
+            }
             //
             image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
             ExitButton.setGraphic(new ImageView(image));
@@ -129,6 +131,16 @@ public class MainMenuController implements Initializable {
         MyProviderRequest controller = fxmlLoader.getController();
         controller.setData(MainMenuController.this);
         UIWorkSpace.setCenter(anchorPane);
+    }
+    public void setAdminPane() throws IOException {
+        if(User.isAdmin()) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("AdminPanel.fxml"));
+            Pane anchorPane = fxmlLoader.load();
+            AdminPaneController controller = fxmlLoader.getController();
+            controller.setData(MainMenuController.this);
+            UIWorkSpace.setCenter(anchorPane);
+        }
     }
     public void exitFromAccount() throws IOException {
         User.exit();

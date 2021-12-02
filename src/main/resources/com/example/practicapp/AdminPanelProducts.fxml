@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.AdminPaneProductController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" layoutY="51.0" prefHeight="399.0" prefWidth="570.0" style="-fx-background-color: transparent;">
+         <content>
+            <GridPane fx:id="gridPane" layoutY="-51.0">
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Button layoutX="487.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNewProduct" text="Добавить" />
+      <TextField fx:id="searchField" alignment="CENTER" layoutX="375.0" layoutY="14.0" onInputMethodTextChanged="#search" onKeyPressed="#search" prefHeight="25.0" prefWidth="94.0" promptText="Поиск" />
+   </children>
+</Pane>

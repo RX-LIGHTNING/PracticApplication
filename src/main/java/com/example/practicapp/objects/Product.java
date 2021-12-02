@@ -12,7 +12,14 @@ public class Product {
     private Image image;
     private String description;
     private int id;
+    private int recipe;
 
+    public int getRecipe() {
+        return recipe;
+    }
+    public void setRecipe(int recipe) {
+        this.recipe = recipe;
+    }
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public String getName() {
@@ -44,11 +51,12 @@ public class Product {
         return img;
     }
 
-    public Product(String name, int price, byte[] image, String description, int id) {
+    public Product(String name, int price, byte[] image, String description, int id, int recipe) {
         this.name = name;
         this.price = price;
         this.image = getImageFromBytes(image);
         this.description = description;
         this.id =id;
+        this.recipe = recipe;
     }
 }
