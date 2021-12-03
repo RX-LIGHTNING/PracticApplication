@@ -14,7 +14,7 @@
       <Text layoutX="207.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название ингредиента" textAlignment="CENTER" wrappingWidth="142.484375" />
       <Button layoutX="81.0" layoutY="2.0" mnemonicParsing="false" onAction="#ingredDelete" text="Удалить" />
       <Button layoutY="2.0" mnemonicParsing="false" onAction="#ingredInsert" text="Добавить" />
-      <Button layoutX="258.0" layoutY="2.0" mnemonicParsing="false" text="Обновить" />
+      <Button layoutX="258.0" layoutY="2.0" mnemonicParsing="false" onAction="#updateIngreds" text="Обновить" />
       <VBox fx:id="Providers" layoutX="192.0" layoutY="84.0" prefHeight="365.0" prefWidth="178.0" />
       <Button layoutX="152.0" layoutY="2.0" mnemonicParsing="false" onAction="#ingredUpdate" text="редактировать" />
    </children>

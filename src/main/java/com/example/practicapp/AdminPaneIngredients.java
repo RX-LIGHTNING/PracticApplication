@@ -22,8 +22,11 @@ public class AdminPaneIngredients {
         updateIngreds();
     }
     public void updateIngreds(){
+        ingredsList = DatabaseController.getIngredients();
+        ingredsButton = new Button[ingredsList.size()];
+        IngredVbox.getChildren().clear();
         for (int i = 0; i < ingredsList.size(); i++) {
-            ingredsButton[i]  =new Button();
+            ingredsButton[i]=new Button();
             ingredsButton[i].setText("ID:"+ingredsList.get(i).getIng_id()+" "+ingredsList.get(i).getName());
             ingredsButton[i].setPrefWidth(150);
             int id = ingredsList.get(i).getIng_id();
@@ -48,16 +51,21 @@ public class AdminPaneIngredients {
     public void ingredInsert(){
         if(!Objects.equals(ingredTextField.getText(), "")){
             DatabaseController.insertIngredient(ingredTextField.getText());
+
         }
+        updateIngreds();
     }
     public void ingredUpdate(){
-        if(selecteditem!=0 && Objects.equals(ingredTextField.getText(), "")){
+        if(selecteditem!=0 && !Objects.equals(ingredTextField.getText(), "")){
             DatabaseController.updateIngredient(selecteditem,ingredTextField.getText());
         }
+        updateIngreds();
     }
     public void ingredDelete(){
         if(selecteditem!=0){
             DatabaseController.deleteIngredient(selecteditem);
+
         }
+        updateIngreds();
     }
 }
