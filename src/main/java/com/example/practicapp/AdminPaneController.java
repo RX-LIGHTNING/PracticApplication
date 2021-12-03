@@ -24,10 +24,10 @@ public class AdminPaneController {
     }
     public void showRecipesPane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("ProductList.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("AdminPanelRecipes.fxml"));
         Pane anchorPane = fxmlLoader.load();
-        //  ProductListController controller = fxmlLoader.getController();
-        //  controller.setData(AdminPaneController.this);
+        AdminPaneRecipesController controller = fxmlLoader.getController();
+        controller.setData(AdminPaneController.this);
         AdminPane.setCenter(anchorPane);
     }
     public void showInformationPane() throws IOException {

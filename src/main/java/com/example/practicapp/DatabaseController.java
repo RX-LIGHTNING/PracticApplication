@@ -41,6 +41,16 @@ abstract class DatabaseController {
     private static final String PROVIDER_REQUEST_DELETE_QUERY = "DELETE FROM providersingredient WHERE provider_id = ? AND ingredient_id = ?";
     private static Connection connection;
     private static final String INGREDIENT_SELECT_QUERY = "SELECT * FROM ingredients";
+    private static final String RECIPE_SELECT_QUERY = "SELECT ingredients.ing_id,recipes.name recipename, ingredients.name ingredientname, quantity, recipes.rec_id\n" +
+            "FROM ingredients\n" +
+            "INNER JOIN ingredientstorecipes ON ingredients.ing_id = ingredientstorecipes.ing_id\n" +
+            "INNER JOIN recipes ON recipes.rec_id = ingredientstorecipes.rec_id where recipes.rec_id = ?";
+    private static final String RECIPES_SELECT_QUERY = "SELECT * from recipes";
+    private static final String RECIPE_UPDATE_QUERY = "UPDATE ingredientstorecipes set quantity = ? where rec_id = ? and ing_id = ?";
+    private static final String RECIPE_ING_INSERT_QUERY = "INSERT INTO ingredientstorecipes(quantity,rec_id,ing_id) VALUES(?,?,?)";
+    private static final String RECIPE_NAME_UPDATE_QUERY = "UPDATE recipes set name = ? where rec_id = ?";
+    private static final String RECIPE_INSERT_QUERY = "INSERT INTO recipes(name) VALUES(?)";
+    private static final String RECIPE_DELETE_QUERY = "DELETE FROM recipes WHERE rec_id=?;";
 
     public static Connection getConnection() {
         try {
@@ -284,6 +294,95 @@ abstract class DatabaseController {
         return result;
     }
 
+    public static List<Recipe> getRecipes() {
+        List<Recipe> result= new ArrayList<Recipe>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(RECIPES_SELECT_QUERY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                result.add(new Recipe(resultSet.getInt("rec_id"),
+                        resultSet.getString("name")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static List<Ingredient> getRecipeIngredients(int id) {
+        List<Ingredient> result= new ArrayList<Ingredient>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(RECIPE_SELECT_QUERY)) {
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                result.add(new Ingredient(
+                        resultSet.getString("ingredientname"),
+                        resultSet.getInt("ing_id"),
+                        resultSet.getInt("quantity")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean updateRecipe(int rec_id, int ing_id, int quantity, String name){
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(RECIPE_UPDATE_QUERY)
+
+        ) {
+            preparedStatement.setInt(1,quantity);
+            preparedStatement.setInt(2,rec_id);
+            preparedStatement.setInt(3,ing_id);
+            if(preparedStatement.executeUpdate()>0){
+
+            }
+            else{
+                PreparedStatement preparedStatement2 = connection.prepareStatement(RECIPE_ING_INSERT_QUERY);
+                preparedStatement2.setInt(1,quantity);
+                preparedStatement2.setInt(2,rec_id);
+                preparedStatement2.setInt(3,ing_id);
+                preparedStatement2.execute();
+                result = true;
+            }
+            PreparedStatement preparedStatement3 = connection.prepareStatement(RECIPE_NAME_UPDATE_QUERY);
+            preparedStatement3.setString(1,name);
+            preparedStatement3.setInt(2,rec_id);
+            preparedStatement3.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean insertRecipe(String name){
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(RECIPE_INSERT_QUERY)
+
+        ) {
+            preparedStatement.setString(1,name);
+            preparedStatement.execute();
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean deleteRecipe(int rec_id){
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(RECIPE_DELETE_QUERY)
+
+        ) {
+            preparedStatement.setInt(1,rec_id);
+            preparedStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     public static boolean InsertIngredientPrice(int ing_id, int price) {
             boolean result = false;
             try (Connection connection = getConnection();
