@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 abstract class DatabaseController {
-    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Vkid";
+    private final static String jdbcURL = "jdbc:postgresql://192.168.100.4:5432/Vkid";
     private final static String username = "postgres";
     private final static String password = "root";
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
@@ -29,11 +29,11 @@ abstract class DatabaseController {
     private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture,recipe) VALUES(?,?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
     private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providersingredient (provider_id,ingredient_id,price) VALUES(?,?,?)";
-    private static final String PROVIDER_SELECT_QUERY = "SELECT price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
+    private static final String PROVIDER_SELECT_QUERY = "SELECT status, price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
             "FROM ingredients\n" +
             "INNER JOIN providersingredient ON ing_id = ingredient_id\n" +
             "INNER JOIN users ON provider_id = id where users.flag>2";
-    private static final String PROVIDER_SELECT_BY_ID_QUERY = "SELECT price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
+    private static final String PROVIDER_SELECT_BY_ID_QUERY = "SELECT status, price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
             "FROM ingredients\n" +
             " INNER JOIN providersingredient ON ing_id = ingredient_id\n" +
             " INNER JOIN users ON provider_id = id where users.flag>2 and providersingredient.provider_id = ?";
@@ -54,6 +54,8 @@ abstract class DatabaseController {
     private static final String INGREDIENT_INSERT_QUERY = "INSERT INTO ingredients(name) VALUES(?)";
     private static final String INGREDIENT_UPDATE_QUERY = "UPDATE ingredients set name = ? WHERE ing_id = ?";
     private static final String INGREDIENT_DELETE_QUERY = "DELETE FROM ingredients WHERE ing_id = ?";
+    private static final String PROVIDER_STATUS_CHANGE = "UPDATE providersingredient set status = ? where ingredient_id = ?";
+    private static final String PROVIDER_INGREDIENT_STATUS_CHANGE = "UPDATE providersingredient set status = ? where ingredient_id = ? and provider_id = ?";
     public static Connection getConnection() {
         try {
             if (Objects.isNull(connection) || connection.isClosed()) {
@@ -188,7 +190,8 @@ abstract class DatabaseController {
                         resultSet.getInt("ingredient_id"),
                         resultSet.getString("organisation"),
                         resultSet.getInt("price"),
-                        resultSet.getString("name")
+                        resultSet.getString("name"),
+                        resultSet.getBoolean("status")
                        ));
             }
 
@@ -210,7 +213,8 @@ abstract class DatabaseController {
                         resultSet.getInt("ingredient_id"),
                         resultSet.getString("organisation"),
                         resultSet.getInt("price"),
-                        resultSet.getString("name")
+                        resultSet.getString("name"),
+                        resultSet.getBoolean("status")
                 ));
             }
 
@@ -437,6 +441,21 @@ abstract class DatabaseController {
              PreparedStatement preparedStatement = connection.prepareStatement(INGREDIENT_DELETE_QUERY)) {
             preparedStatement.setInt(1, selecteditem);
             preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateProviderStatus(int ing_id,int provider_id) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PROVIDER_STATUS_CHANGE)) {
+            preparedStatement.setBoolean(1,false);
+            preparedStatement.setInt(2,ing_id);
+            preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement2 = connection.prepareStatement(PROVIDER_INGREDIENT_STATUS_CHANGE);
+            preparedStatement2.setBoolean(1,true);
+            preparedStatement2.setInt(2,ing_id);
+            preparedStatement2.setInt(3,provider_id);
+            preparedStatement2.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

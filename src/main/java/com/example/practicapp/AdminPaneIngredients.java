@@ -1,6 +1,7 @@
 package com.example.practicapp;
 
 import com.example.practicapp.objects.Ingredient;
+import com.example.practicapp.objects.Provider;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,7 +17,9 @@ public class AdminPaneIngredients {
     @FXML private VBox Providers;
     @FXML private TextField ingredTextField;
     List<Ingredient> ingredsList = DatabaseController.getIngredients();
+    List<Provider> providersList = DatabaseController.getProviders();
     Button[] ingredsButton = new Button[ingredsList.size()];
+    Button[] ProvidersButton = new Button[ingredsList.size()];
     int selecteditem=0;
     public void setData(AdminPaneController adminPaneController){
         updateIngreds();
@@ -40,13 +43,42 @@ public class AdminPaneIngredients {
         }
 
     }
+    public void updateProviders(int ing_id){
+        providersList = DatabaseController.getProviders();
+        ProvidersButton = new Button[providersList.size()];
+        Providers.getChildren().clear();
+        for (int i = 0; i < providersList.size(); i++) {
+            if(ing_id==providersList.get(i).getIng_id()) {
+                ProvidersButton[i] = new Button();
+                ProvidersButton[i].setText("Пост:" + providersList.get(i).getOrgname() + " цена:" + providersList.get(i).getPrice()+"руб/кг");
+                if(providersList.get(i).getStatus()){
+                    ProvidersButton[i].setStyle("-fx-background-color: #18A4E0;");
+                }
+                ProvidersButton[i].setPrefWidth(300);
+                int id = providersList.get(i).getId();
+                ProvidersButton[i].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                    public void handle(ActionEvent actionEvent) {
+                       onProviderChange(id);
+                }
+                });
+                Providers.getChildren().add(ProvidersButton[i]);
+            }
+        }
+
+    }
     public void onSelect(int id){
         selecteditem = id;
+        updateProviders(id);
         for (int i = 0; i < ingredsList.size(); i++) {
             if(ingredsList.get(i).getIng_id()==id) {
                 ingredTextField.setText(ingredsList.get(i).getName());
             }
         }
+    }
+    public void onProviderChange(int id){
+        DatabaseController.updateProviderStatus(selecteditem,id);
+        updateProviders(selecteditem);
     }
     public void ingredInsert(){
         if(!Objects.equals(ingredTextField.getText(), "")){

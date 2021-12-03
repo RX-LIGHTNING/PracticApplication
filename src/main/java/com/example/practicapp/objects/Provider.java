@@ -7,6 +7,13 @@ public class Provider implements Comparable<Provider> {
     private String ingredientname;
     private int ing_id;
 
+    public boolean getStatus() {
+        return status;
+    }
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    private boolean status;
     public int getIng_id() {
         return ing_id;
     }
@@ -43,11 +50,12 @@ public class Provider implements Comparable<Provider> {
     }
 
 
-    public Provider(int id,int ing_id, String orgname, int price, String ingredientname) {
+    public Provider(int id,int ing_id, String orgname, int price, String ingredientname, boolean status) {
         this.id = id;
         this.ing_id = ing_id;
         this.orgname = orgname;
         this.price = price;
         this.ingredientname = ingredientname;
+        this.status = status;
     }
 }

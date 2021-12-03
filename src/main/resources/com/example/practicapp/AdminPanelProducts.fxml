@@ -18,7 +18,7 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Button layoutX="487.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNewProduct" text="Добавить" />
-      <TextField fx:id="searchField" alignment="CENTER" layoutX="375.0" layoutY="14.0" onInputMethodTextChanged="#search" onKeyPressed="#search" prefHeight="25.0" prefWidth="94.0" promptText="Поиск" />
+      <Button layoutX="487.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNewProduct" style="-fx-background-color: #18A4E0; -fx-text-fill: white; -fx-background-radius: 0 10 10 0;" text="Добавить" />
+      <TextField fx:id="searchField" alignment="CENTER" layoutX="393.0" layoutY="14.0" onInputMethodTextChanged="#search" onKeyPressed="#search" prefHeight="26.0" prefWidth="94.0" promptText="Поиск" style="-fx-background-radius: 10 0 0 10;" />
    </children>
 </Pane>
