@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +25,7 @@ public class AdminPaneRecipesController {
     AdminPaneController adminPaneController;
     TextField[] ingredientFields = new TextField[DatabaseController.getIngredients().size()+1];
     Button[] recipes;
+    Text[] ingred_name =new Text[ingredientFields.length];
     int temp;
     public void setData(AdminPaneController adminPaneController){
         this.adminPaneController = adminPaneController;
@@ -51,11 +53,15 @@ public class AdminPaneRecipesController {
             });
         }
         for (int i = 0; i < ingredient2.size(); i++) {
+
             ingredientFields[i] = new TextField();
+            ingred_name[i] = new Text();
+            ingred_name[i].setText(ingredient2.get(i).getName());
             ingredientFields[i].setPromptText(ingredient2.get(i).getName());
             ingredientFields[i].setId(String.valueOf(ingredient2.get(i).getIng_id()));
             ingredientFields[ingredient2.size()] = new TextField();
-
+            ingred_name[ingred_name.length-1] = new Text();
+            ingred_name[ingred_name.length-1].setText("Название");
             for (int j = 0; j < ingredient.size(); j++) {
                 if (ingredient.get(j).getIng_id() == ingredient2.get(i).getIng_id()) {
                     ingredientFields[i].setText(String.valueOf(ingredient.get(j).getQuantity()));
@@ -68,9 +74,11 @@ public class AdminPaneRecipesController {
                 }
 
             }
+            ingredients.getChildren().add(ingred_name[i]);
             ingredients.getChildren().add(ingredientFields[i]);
 
         }
+        ingredients.getChildren().add(ingred_name[ingred_name.length-1]);
         ingredients.getChildren().add(ingredientFields[ingredient2.size()]);
     }
     public  void onSelect(int id){

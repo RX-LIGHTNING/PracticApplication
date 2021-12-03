@@ -51,7 +51,9 @@ abstract class DatabaseController {
     private static final String RECIPE_NAME_UPDATE_QUERY = "UPDATE recipes set name = ? where rec_id = ?";
     private static final String RECIPE_INSERT_QUERY = "INSERT INTO recipes(name) VALUES(?)";
     private static final String RECIPE_DELETE_QUERY = "DELETE FROM recipes WHERE rec_id=?;";
-
+    private static final String INGREDIENT_INSERT_QUERY = "INSERT INTO ingredients(name) VALUES(?)";
+    private static final String INGREDIENT_UPDATE_QUERY = "UPDATE ingredients set name = ? WHERE ing_id = ?";
+    private static final String INGREDIENT_DELETE_QUERY = "DELETE FROM ingredients WHERE ing_id = ?";
     public static Connection getConnection() {
         try {
             if (Objects.isNull(connection) || connection.isClosed()) {
@@ -409,5 +411,34 @@ abstract class DatabaseController {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void insertIngredient(String updatedstring) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INGREDIENT_INSERT_QUERY)) {
+            preparedStatement.setString(1, updatedstring);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateIngredient(int selecteditem,String updatedstring) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INGREDIENT_UPDATE_QUERY)) {
+            preparedStatement.setString(1, updatedstring);
+            preparedStatement.setInt(2, selecteditem);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void deleteIngredient(int selecteditem) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INGREDIENT_DELETE_QUERY)) {
+            preparedStatement.setInt(1, selecteditem);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
