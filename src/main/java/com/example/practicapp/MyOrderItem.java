@@ -27,4 +27,7 @@ public class MyOrderItem {
         DatabaseController.OrderCancel(order.getId(),-1);
         mainMenuController.setMyOrderPane();
     }
+    public void printAgreement(){
+
+    }
 }

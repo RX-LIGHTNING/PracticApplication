@@ -14,7 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -100,5 +105,33 @@ public class AdminPaneOrders {
     public void searchReset(){
         sort = 0;
         updategrid("","");
+    }
+    public void printOrders() throws IOException {
+        String filePath = "1.xlsx";
+        List<Order> OrderList = DatabaseController.getAllOrders();
+        Workbook excelWookBook = new XSSFWorkbook();
+        Sheet employeeSheet = excelWookBook.createSheet("Orders");
+        Row headerRow = employeeSheet.createRow(0);
+
+        headerRow.createCell(0).setCellValue("Organisation");
+        headerRow.createCell(1).setCellValue("Contacts");
+        headerRow.createCell(2).setCellValue("OrderDate");
+        headerRow.createCell(3).setCellValue("Quantity");
+        headerRow.createCell(4).setCellValue("Status");
+        int size = OrderList.size();
+        for(int i=0;i<size;i++)
+        {
+            Order eDto = OrderList.get(i);
+            Row row = employeeSheet.createRow(i+1);
+            row.createCell(0).setCellValue(eDto.getOrganzition());
+            row.createCell(1).setCellValue(eDto.getContact());
+            row.createCell(2).setCellValue(eDto.getDate().toString());
+            row.createCell(3).setCellValue(eDto.getQuantity());
+            row.createCell(4).setCellValue(eDto.getStatus());
+
+        }
+        FileOutputStream fOut = new FileOutputStream(filePath);
+        excelWookBook.write(fOut);
+        fOut.close();
     }
 }
