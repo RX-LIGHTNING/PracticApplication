@@ -28,6 +28,7 @@ abstract class DatabaseController {
     private static final String PRODUCT_UPDATE_QUERY = "UPDATE products set name = ?, description = ?, price = ?, picture = ?, recipe = ?, quantity = ? WHERE id = ?";
     private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture,recipe,quantity) VALUES(?,?,?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
+    private static final String ALL_ORDERS_SELECT_QUERY = "SELECT * FROM orders";
     private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providersingredient (provider_id,ingredient_id,price) VALUES(?,?,?)";
     private static final String PROVIDER_SELECT_QUERY = "SELECT status, price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
             "FROM ingredients\n" +
@@ -37,6 +38,7 @@ abstract class DatabaseController {
             "FROM ingredients\n" +
             " INNER JOIN providersingredient ON ing_id = ingredient_id\n" +
             " INNER JOIN users ON provider_id = id where users.flag>2 and providersingredient.provider_id = ?";
+    private static final String ORDER_UPDATE_QUERY = "UPDATE orders set status = ? WHERE id = ?";
     private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
     private static final String PROVIDER_REQUEST_DELETE_QUERY = "DELETE FROM providersingredient WHERE provider_id = ? AND ingredient_id = ?";
     private static Connection connection;
@@ -268,6 +270,30 @@ abstract class DatabaseController {
         }
         return result;
     }
+    public static List<Order> getAllOrders() {
+        List<Order> result = new ArrayList<>();
+        if(User.isAdmin()) {
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(ALL_ORDERS_SELECT_QUERY)) {
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Order(
+                            resultSet.getInt("id"),
+                            resultSet.getString("organization"),
+                            resultSet.getInt("quantity"),
+                            resultSet.getString("product"),
+                            resultSet.getDate("date"),
+                            resultSet.getString("contacts"),
+                            resultSet.getInt("status")
+                    ));
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
     public static boolean ProductInsert(String name, int price, String description, File temp, int recipe, int quantity) throws IOException {
         boolean result = false;
         byte[] file = Files.readAllBytes(temp.toPath());
@@ -305,7 +331,17 @@ abstract class DatabaseController {
         }
         return result;
     }
-
+    public static void OrderCancel(int id, int status) throws IOException {
+        boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(ORDER_UPDATE_QUERY)) {
+            preparedStatement.setInt(1, status);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public static List<Recipe> getRecipes() {
         List<Recipe> result= new ArrayList<Recipe>();
         try (Connection connection = getConnection();

@@ -59,10 +59,6 @@ private String Contact;
         return Status;
     }
 
-    public void setStatus(String status) {
-        Status = status;
-    }
-
     private String Status;
     public Order(int id, String organization, int quantity, String product, Date date, String contacts, int status) {
         this.id = id;
@@ -71,6 +67,6 @@ private String Contact;
         this.productid = product;
         this.date = date;
         this.Contact = contacts;
-        this.Status = status==0?"Проверка": status ==1?"Ожидание выполнения": status == 2? "Выполнен":"N/A";
+        this.Status = status==0?"Проверка":status ==-1?"Отмененно": status ==1?"Ожидание выполнения": status == 2? "Выполнен":"N/A";
     }
 }

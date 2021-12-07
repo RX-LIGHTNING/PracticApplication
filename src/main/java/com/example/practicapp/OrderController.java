@@ -3,6 +3,7 @@ package com.example.practicapp;
 import com.example.practicapp.objects.Product;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -19,7 +20,9 @@ public class OrderController {
     @FXML
     private DatePicker productDate;
     @FXML
-    private TextField productQuantity;
+    private Slider productQuantity;
+    @FXML
+            private Text quantityText;
     MainMenuController mainMenuController;
     private int id;
     private String name;
@@ -36,11 +39,14 @@ public class OrderController {
         java.sql.Date gettedDatePickerDate = java.sql.Date.valueOf(productDate.getValue());
         java.sql.Date CurrentDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         if(gettedDatePickerDate.after(CurrentDate) &&
-                !Objects.equals(productQuantity.getText(), "") &&
+               productQuantity.getValue()!=0 &&
                 !Objects.equals(contactField.getText(),"")
         ){
-            DatabaseController.OrderInsert(Integer.parseInt(productQuantity.getText()),this.name, gettedDatePickerDate,contactField.getText());
+            DatabaseController.OrderInsert((int) productQuantity.getValue(),this.name, gettedDatePickerDate,contactField.getText());
             mainMenuController.setProductListPane();
         }
+    }
+    public void quantityChange(){
+        quantityText.setText(String.valueOf((int)(productQuantity.getValue())));
     }
 }
