@@ -14,7 +14,14 @@ public class Product {
     private int id;
     private int recipe;
     private byte[] imageBytes;
+    private int quantity;
+    public int getQuantity() {
+        return quantity;
+    }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
     public byte[] getImageBytes() {
         return imageBytes;
     }
@@ -58,7 +65,7 @@ public class Product {
         return img;
     }
 
-    public Product(String name, int price, byte[] image, String description, int id, int recipe) {
+    public Product(String name, int price, byte[] image, String description, int id, int recipe, int quantity) {
         this.name = name;
         this.price = price;
         this.imageBytes = image;
@@ -66,5 +73,6 @@ public class Product {
         this.description = description;
         this.id =id;
         this.recipe = recipe;
+        this.quantity = quantity;
     }
 }

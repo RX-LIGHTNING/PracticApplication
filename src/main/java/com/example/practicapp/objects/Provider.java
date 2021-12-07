@@ -7,13 +7,17 @@ public class Provider implements Comparable<Provider> {
     private String ingredientname;
     private int ing_id;
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    private boolean status;
     public boolean getStatus() {
         return status;
     }
     public void setStatus(boolean status) {
         this.status = status;
     }
-    private boolean status;
     public int getIng_id() {
         return ing_id;
     }

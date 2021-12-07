@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.AdminPaneAddNewProductController">
    <children>
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите название" wrappingWidth="123.13671875" />
@@ -16,9 +15,11 @@
       <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите путь к файлу изображения" wrappingWidth="123.13671875" />
       <Button layoutX="151.0" layoutY="85.0" mnemonicParsing="false" onAction="#FileSelecter" text="Выбрать" />
       <Button layoutX="247.0" layoutY="398.0" mnemonicParsing="false" onAction="#createNewProduct" text="Подтверждение" />
-      <Text layoutX="14.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите описание" wrappingWidth="148.5078125" />
+      <Text layoutX="11.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите описание" wrappingWidth="148.5078125" />
       <TextField fx:id="priceField" layoutX="145.0" layoutY="125.0" />
-      <TextArea fx:id="prodDescription" layoutX="145.0" layoutY="174.0" prefHeight="141.0" prefWidth="149.0" />
+      <TextArea fx:id="prodDescription" layoutX="142.0" layoutY="212.0" prefHeight="141.0" prefWidth="149.0" wrapText="true" />
       <Text layoutX="14.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите цену продукта" wrappingWidth="148.5078125" />
+      <TextField fx:id="quantityField" layoutX="142.0" layoutY="169.0" />
+      <Text layoutX="11.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите количество продукта" wrappingWidth="148.5078125" />
    </children>
 </Pane>

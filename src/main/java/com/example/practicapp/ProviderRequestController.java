@@ -16,13 +16,10 @@ import static com.example.practicapp.DatabaseController.getIngredients;
 public class ProviderRequestController {
         @FXML
         private TextField IngredientPrice;
-
         @FXML
         private Text Ingridient;
-
         @FXML
         private Text checktext;
-
         @FXML
         private Pane mainPane;
         List<Ingredient> temp =  DatabaseController.getIngredients();

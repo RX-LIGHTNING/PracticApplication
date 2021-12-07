@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.AdminPanePrice">
+   <children>
+      <VBox fx:id="productVbox" layoutX="6.0" layoutY="5.0" prefHeight="440.0" prefWidth="147.0" />
+      <PieChart fx:id="priceChart" focusTraversable="true" labelLineLength="10.0" layoutX="160.0" legendSide="LEFT" prefHeight="197.0" prefWidth="403.0" scaleShape="false" title="Распределение " />
+      <Text fx:id="resultText" layoutX="174.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Итого:" />
+      <PieChart fx:id="IngredChart" focusTraversable="true" labelLineLength="10.0" layoutX="160.0" layoutY="197.0" legendSide="LEFT" prefHeight="197.0" prefWidth="403.0" scaleShape="false" title="Ингредиент" />
+   </children>
+</Pane>

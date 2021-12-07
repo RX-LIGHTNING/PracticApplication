@@ -73,6 +73,7 @@ public class MainMenuController implements Initializable {
             NavBar.getChildren().remove(CustomerButton1);
             NavBar.getChildren().remove(CustomerButton11);
         }
+
     }
     public void setProductListPane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();

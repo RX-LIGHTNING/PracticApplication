@@ -36,6 +36,7 @@ public class ProvidersController {
             ingreds.add(temp.get(i).getName());
         }
             ingredientBox.setItems(ingreds);
+        ingredientBox.setValue("");
         updategrid("", "");
 
     }
@@ -48,7 +49,8 @@ public class ProvidersController {
                 //list sort
                 if(sort==1){Collections.sort(providers);}
                 else if(sort==2){Collections.sort(providers);Collections.reverse(providers);}
-                if(providers.get(i).getOrgname().toLowerCase(Locale.ROOT).contains(filter)&&providers.get(i).getIngredientname().contains(ingredient)) {
+                if(providers.get(i).getOrgname().toLowerCase(Locale.ROOT).contains(filter)&&
+                        providers.get(i).getIngredientname().contains(ingredient)) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProviderItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();

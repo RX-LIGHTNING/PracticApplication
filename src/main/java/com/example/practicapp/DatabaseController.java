@@ -18,15 +18,15 @@ import java.util.List;
 import java.util.Objects;
 
 abstract class DatabaseController {
-    private final static String jdbcURL = "jdbc:postgresql://192.168.100.4:5432/Vkid";
+    private final static String jdbcURL = "jdbc:postgresql://localhost:5432/Vkid";
     private final static String username = "postgres";
     private final static String password = "root";
     private static final String USER_SELECT_QUERY = "SELECT * FROM users WHERE login = ? AND password = ?";
     private static final String USER_FIND_QUERY = "SELECT * FROM users WHERE login = ?";
     private static final String USER_INSERT_QUERY = "INSERT INTO users (login, password, organisation,mail,flag) VALUES (?,?,?,?,?)";
     private static final String PRODUCT_SELECT_QUERY = "SELECT * FROM products";
-    private static final String PRODUCT_UPDATE_QUERY = "UPDATE products set name = ?, description = ?, price = ?, picture = ?, recipe = ? WHERE id = ?";
-    private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture,recipe) VALUES(?,?,?,?,?)";
+    private static final String PRODUCT_UPDATE_QUERY = "UPDATE products set name = ?, description = ?, price = ?, picture = ?, recipe = ?, quantity = ? WHERE id = ?";
+    private static final String PRODUCT_INSERT_QUERY = "INSERT INTO products (name,description,price,picture,recipe,quantity) VALUES(?,?,?,?,?,?)";
     private static final String ORDERS_SELECT_QUERY = "SELECT * FROM orders WHERE organization = ?";
     private static final String PROVIDER_REQUEST_INSERT_QUERY = "INSERT INTO providersingredient (provider_id,ingredient_id,price) VALUES(?,?,?)";
     private static final String PROVIDER_SELECT_QUERY = "SELECT status, price, provider_id, ingredient_id,name, ing_id, id, organisation\n" +
@@ -56,6 +56,9 @@ abstract class DatabaseController {
     private static final String INGREDIENT_DELETE_QUERY = "DELETE FROM ingredients WHERE ing_id = ?";
     private static final String PROVIDER_STATUS_CHANGE = "UPDATE providersingredient set status = ? where ingredient_id = ?";
     private static final String PROVIDER_INGREDIENT_STATUS_CHANGE = "UPDATE providersingredient set status = ? where ingredient_id = ? and provider_id = ?";
+    private static final String INDIRECT_COSTS_SELECT_QUERY= "SELECT * FROM indirectcosts\n" +
+            "WHERE EXTRACT(MONTH FROM month) = EXTRACT(MONTH FROM Current_timestamp) \n" +
+            "AND EXTRACT(YEAR FROM month) = EXTRACT(YEAR FROM Current_timestamp) \n";
     public static Connection getConnection() {
         try {
             if (Objects.isNull(connection) || connection.isClosed()) {
@@ -152,7 +155,8 @@ abstract class DatabaseController {
                         resultSet.getBytes("picture"),
                         resultSet.getString("description"),
                         resultSet.getInt("id"),
-                        resultSet.getInt("recipe")
+                        resultSet.getInt("recipe"),
+                        resultSet.getInt("quantity")
                 ));
             }
 
@@ -264,7 +268,7 @@ abstract class DatabaseController {
         }
         return result;
     }
-    public static boolean ProductInsert(String name, int price, String description, File temp, int recipe) throws IOException {
+    public static boolean ProductInsert(String name, int price, String description, File temp, int recipe, int quantity) throws IOException {
         boolean result = false;
         byte[] file = Files.readAllBytes(temp.toPath());
         try (Connection connection = getConnection();
@@ -274,6 +278,7 @@ abstract class DatabaseController {
             preparedStatement.setInt(3, price);
             preparedStatement.setBytes(4, file);
             preparedStatement.setInt(5, recipe);
+            preparedStatement.setInt(6, quantity);
             preparedStatement.execute();
             result = true;
         } catch (SQLException e) {
@@ -282,7 +287,7 @@ abstract class DatabaseController {
         return result;
     }
 
-    public static boolean ProductUpdate(String name, int price, String description, byte[] file, int recipe, int id) throws IOException {
+    public static boolean ProductUpdate(String name, int price, String description, byte[] file, int recipe, int id, int quantity) throws IOException {
         boolean result = false;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_UPDATE_QUERY)) {
@@ -292,6 +297,7 @@ abstract class DatabaseController {
             preparedStatement.setBytes(4, file);
             preparedStatement.setInt(5, recipe);
             preparedStatement.setInt(6, id);
+            preparedStatement.setInt(6, quantity);
             preparedStatement.execute();
             result = true;
         } catch (SQLException e) {
@@ -459,5 +465,19 @@ abstract class DatabaseController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static int getIndirectCost() {
+        int sum = 0;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INDIRECT_COSTS_SELECT_QUERY)) {
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                sum+= resultSet.getInt("cost");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sum;
     }
 }

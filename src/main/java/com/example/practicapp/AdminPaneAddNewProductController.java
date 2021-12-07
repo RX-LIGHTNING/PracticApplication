@@ -23,6 +23,8 @@ public class AdminPaneAddNewProductController {
     @FXML
     private TextField priceField;
     @FXML
+    private TextField quantityField;
+    @FXML
     private String picPath;
     @FXML
     private TextArea prodDescription;
@@ -48,7 +50,8 @@ public class AdminPaneAddNewProductController {
                         Integer.parseInt(priceField.getText()),
                         prodDescription.getText(),
                         new File(picPath),
-                        Integer.parseInt(recipeField.getText()));
+                        Integer.parseInt(recipeField.getText()),
+                        Integer.parseInt(quantityField.getText()));
             }
             else if(picPath.equals("1")){
                 DatabaseController.ProductUpdate(nameField.getText(),
@@ -56,7 +59,8 @@ public class AdminPaneAddNewProductController {
                         prodDescription.getText(),
                         temp,
                         Integer.parseInt(recipeField.getText()),
-                        product.getId());
+                        product.getId(),
+                        product.getQuantity());
             }
             else {
                 File filefromURL = new File(picPath);
@@ -66,7 +70,8 @@ public class AdminPaneAddNewProductController {
                             prodDescription.getText(),
                             file,
                             Integer.parseInt(recipeField.getText()),
-                            product.getId());
+                            product.getId(),
+                            product.getQuantity());
             }
             adminPaneController.showProductsPane();
         }
@@ -81,6 +86,7 @@ public class AdminPaneAddNewProductController {
             prodDescription.setText(product.getDescription());
             priceField.setText(String.valueOf(product.getPrice()));
             temp = product.getImageBytes();
+            quantityField.setText(String.valueOf(product.getQuantity()));
             picPath="1";
         }
     }
