@@ -322,9 +322,9 @@ abstract class DatabaseController {
             preparedStatement.setInt(3, price);
             preparedStatement.setBytes(4, file);
             preparedStatement.setInt(5, recipe);
-            preparedStatement.setInt(6, id);
             preparedStatement.setInt(6, quantity);
-            preparedStatement.execute();
+            preparedStatement.setInt(7, id);
+            preparedStatement.executeUpdate();
             result = true;
         } catch (SQLException e) {
             e.printStackTrace();
