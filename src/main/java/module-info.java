@@ -9,6 +9,7 @@ module com.example.practicapp {
     requires org.kordamp.bootstrapfx.core;
     requires org.postgresql.jdbc;
     requires java.sql;
+    requires java.desktop;
     opens com.example.practicapp to javafx.fxml;
     exports com.example.practicapp;
     exports com.example.practicapp.objects;
