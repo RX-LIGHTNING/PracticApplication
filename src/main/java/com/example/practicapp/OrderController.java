@@ -10,19 +10,19 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OrderController {
     @FXML
     private Text ItemName;
     @FXML
     private TextField contactField;
-
-    @FXML
-    private DatePicker productDate;
     @FXML
     private Slider productQuantity;
     @FXML
-            private Text quantityText;
+    private Text quantityText;
+
     MainMenuController mainMenuController;
     private int id;
     private String name;
@@ -36,14 +36,13 @@ public class OrderController {
         mainMenuController.setProductListPane();
     }
     public void orderConfirm() throws IOException {
-        java.sql.Date gettedDatePickerDate = java.sql.Date.valueOf(productDate.getValue());
-        java.sql.Date CurrentDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        if(gettedDatePickerDate.after(CurrentDate) &&
-               productQuantity.getValue()!=0 &&
-                !Objects.equals(contactField.getText(),"")
-        ){
-            DatabaseController.OrderInsert((int) productQuantity.getValue(),this.name, gettedDatePickerDate,contactField.getText());
+        if(productQuantity.getValue()!=0 && Validator.isValid(contactField.getText())){
+            DatabaseController.OrderInsert((int) productQuantity.getValue(),this.name,contactField.getText());
             mainMenuController.setProductListPane();
+        }
+        else{
+            productQuantity.setStyle("-fx-border-color: red;");
+            contactField.setStyle("-fx-border-color: red;");
         }
     }
     public void quantityChange(){

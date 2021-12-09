@@ -39,7 +39,7 @@ abstract class DatabaseController {
             " INNER JOIN providersingredient ON ing_id = ingredient_id\n" +
             " INNER JOIN users ON provider_id = id where users.flag>2 and providersingredient.provider_id = ?";
     private static final String ORDER_UPDATE_QUERY = "UPDATE orders set status = ? WHERE id = ?";
-    private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, date, contacts) VALUES (?,?,?,?,?)";
+    private static final String ORDER_INSERT_QUERY = "INSERT INTO orders (organization, quantity, product, contacts) VALUES (?,?,?,?)";
     private static final String PROVIDER_REQUEST_DELETE_QUERY = "DELETE FROM providersingredient WHERE provider_id = ? AND ingredient_id = ?";
     private static Connection connection;
     private static final String INGREDIENT_SELECT_QUERY = "SELECT * FROM ingredients";
@@ -230,15 +230,14 @@ abstract class DatabaseController {
         return result;
 
     }
-    public static boolean OrderInsert(int quantity,String prod, Date date,String contact) {
+    public static boolean OrderInsert(int quantity,String prod,String contact) {
         boolean result = false;
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(ORDER_INSERT_QUERY)) {
                 preparedStatement.setString(1, User.getOrganization());
                 preparedStatement.setInt(2, quantity);
                 preparedStatement.setString(3, prod);
-                preparedStatement.setDate(4, date);
-                preparedStatement.setString(5,contact);
+                preparedStatement.setString(4,contact);
                 preparedStatement.execute();
                 result = true;
             } catch (SQLException e) {

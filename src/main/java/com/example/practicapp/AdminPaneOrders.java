@@ -128,7 +128,6 @@ public class AdminPaneOrders {
             row.createCell(2).setCellValue(eDto.getDate().toString());
             row.createCell(3).setCellValue(eDto.getQuantity());
             row.createCell(4).setCellValue(eDto.getStatus());
-
         }
         FileOutputStream fOut = new FileOutputStream(filePath);
         excelWookBook.write(fOut);
