@@ -72,7 +72,10 @@ public class ApplicationCoreController extends Application {
     public static void ShowMainMenu() throws IOException {
         st.hide();
         st = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ApplicationCoreController.class.getResource("MainMenu.fxml")));
+
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(ApplicationCoreController.class.getResource("MainMenu.fxml")));
+        Parent root = (Parent)loader.load();
+        MainMenuController controller =loader.getController();
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) { 
@@ -80,6 +83,7 @@ public class ApplicationCoreController extends Application {
                 yOffset = event.getSceneY();
             }
         });
+
         root.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -92,6 +96,7 @@ public class ApplicationCoreController extends Application {
         st.setTitle("Vkid");
         st.setScene(scene);
         st.show();
+        controller.setData(st);
     }
     public static void main(String[] args) {
         launch();

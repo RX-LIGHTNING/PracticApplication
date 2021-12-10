@@ -12,6 +12,6 @@
       <Button layoutX="260.0" layoutY="14.0" mnemonicParsing="false" onAction="#showProductPricePane" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Себестоимость " />
       <BorderPane fx:id="AdminPane" layoutX="7.0" layoutY="52.0" prefHeight="450.0" prefWidth="570.0" />
       <Button layoutX="371.0" layoutY="14.0" mnemonicParsing="false" onAction="#showOrdersPane" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Заказы" />
-      <Button layoutX="449.0" layoutY="14.0" mnemonicParsing="false" onAction="#showOrdersPane" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Статистика" />
+      <Button layoutX="449.0" layoutY="14.0" mnemonicParsing="false" onAction="#showStatistics" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Статистика" />
    </children>
 </Pane>

@@ -52,7 +52,7 @@
          </children>
       </Pane>
       <Button layoutX="744.0" layoutY="2.0" mnemonicParsing="false" onAction="#exitApplication" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="X" />
-      <Button layoutX="697.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="—" />
+      <Button layoutX="697.0" layoutY="2.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="—" />
       <BorderPane fx:id="UIWorkSpace" layoutX="189.0" layoutY="27.0" prefHeight="503.0" prefWidth="585.0" />
    </children>
 </Pane>

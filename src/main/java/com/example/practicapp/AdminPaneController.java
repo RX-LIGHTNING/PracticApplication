@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -68,6 +69,14 @@ public class AdminPaneController {
         Pane anchorPane = fxmlLoader.load();
         AdminPaneAddNewProductController controller = fxmlLoader.getController();
         controller.setData(AdminPaneController.this, mode);
+        AdminPane.setCenter(anchorPane);
+    }
+    public void showStatistics() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("AdminPanelStat.fxml"));
+        Pane anchorPane = fxmlLoader.load();
+        AdminPaneStats controller = fxmlLoader.getController();
+        controller.setData(AdminPaneController.this);
         AdminPane.setCenter(anchorPane);
     }
     public void setData(MainMenuController  mainMenuController) {

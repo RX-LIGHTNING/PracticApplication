@@ -11,13 +11,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class MainMenuController implements Initializable {
+public class MainMenuController {
     @FXML
     Button CustomerButton1;
     @FXML
@@ -36,34 +37,36 @@ public class MainMenuController implements Initializable {
     BorderPane UIWorkSpace;
     @FXML
     VBox NavBar;
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-            Image image;
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/cart.png")));
-            CustomerButton1.setGraphic(new ImageView(image));
-            //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/order.png")));
-            CustomerButton11.setGraphic(new ImageView(image));
-            //
-            if(User.isAdmin()) {
-                image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/settings.png")));
-                SettingButton.setGraphic(new ImageView(image));
-            }
-            else {
-                NavBar.getChildren().remove(SettingButton);
-            }
-            //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
-            ExitButton.setGraphic(new ImageView(image));
-            //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/providers.png")));
-            ProviderButton.setGraphic(new ImageView(image));
-            //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/createticket.png")));
-            ProviderButton1.setGraphic(new ImageView(image));
-            //
-            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/tickets.png")));
-            ProviderButton2.setGraphic(new ImageView(image));
+    Stage stage;
+    public void setData(Stage stage){
+        this.stage = stage;
+        //
+        Image image;
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/cart.png")));
+        CustomerButton1.setGraphic(new ImageView(image));
+        //
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/order.png")));
+        CustomerButton11.setGraphic(new ImageView(image));
+        //
+        if(User.isAdmin()) {
+            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/settings.png")));
+            SettingButton.setGraphic(new ImageView(image));
+        }
+        else {
+            NavBar.getChildren().remove(SettingButton);
+        }
+        //
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/exit.png")));
+        ExitButton.setGraphic(new ImageView(image));
+        //
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/providers.png")));
+        ProviderButton.setGraphic(new ImageView(image));
+        //
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/createticket.png")));
+        ProviderButton1.setGraphic(new ImageView(image));
+        //
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Icons/tickets.png")));
+        ProviderButton2.setGraphic(new ImageView(image));
         if(User.getFlag() == 1){
             NavBar.getChildren().remove(ProviderButton);
             NavBar.getChildren().remove(ProviderButton1);
@@ -73,7 +76,6 @@ public class MainMenuController implements Initializable {
             NavBar.getChildren().remove(CustomerButton1);
             NavBar.getChildren().remove(CustomerButton11);
         }
-
     }
     public void setProductListPane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -142,6 +144,8 @@ public class MainMenuController implements Initializable {
             controller.setData(MainMenuController.this);
             UIWorkSpace.setCenter(anchorPane);
         }
+    }
+    public void hideWindow(){
     }
     public void exitFromAccount() throws IOException {
         User.exit();
