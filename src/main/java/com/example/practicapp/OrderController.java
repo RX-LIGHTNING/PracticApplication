@@ -31,6 +31,7 @@ public class OrderController {
         ItemName.setText(product.getName());
         this.id = product.getId();
         this.name = product.getName();
+        productQuantity.setMax(DatabaseController.leftProduct(product.getName()));
     }
     public void toProductListPane() throws IOException {
         mainMenuController.setProductListPane();

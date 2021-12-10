@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
@@ -9,7 +10,9 @@
    <children>
       <VBox fx:id="productVbox" layoutX="6.0" layoutY="5.0" prefHeight="440.0" prefWidth="147.0" />
       <PieChart fx:id="priceChart" focusTraversable="true" labelLineLength="10.0" layoutX="160.0" legendSide="LEFT" prefHeight="197.0" prefWidth="403.0" scaleShape="false" title="Распределение " />
-      <Text fx:id="resultText" layoutX="174.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Итого:" />
-      <PieChart fx:id="IngredChart" focusTraversable="true" labelLineLength="10.0" layoutX="160.0" layoutY="197.0" legendSide="LEFT" prefHeight="197.0" prefWidth="403.0" scaleShape="false" title="Ингредиент" />
+      <Text fx:id="resultText" layoutX="160.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Итого:" />
+      <PieChart fx:id="IngredChart" focusTraversable="true" labelLineLength="10.0" layoutX="160.0" layoutY="197.0" legendSide="LEFT" prefHeight="188.0" prefWidth="403.0" scaleShape="false" title="Ингредиент" />
+      <ProgressBar fx:id="orderedPB" layoutX="160.0" layoutY="401.0" prefHeight="18.0" prefWidth="403.0" progress="0.0" />
+      <Text layoutX="296.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Заказанная продукция" />
    </children>
 </Pane>

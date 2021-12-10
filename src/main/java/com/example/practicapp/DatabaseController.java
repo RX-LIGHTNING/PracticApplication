@@ -61,6 +61,8 @@ abstract class DatabaseController {
     private static final String INDIRECT_COSTS_SELECT_QUERY= "SELECT * FROM indirectcosts\n" +
             "WHERE EXTRACT(MONTH FROM month) = EXTRACT(MONTH FROM Current_timestamp) \n" +
             "AND EXTRACT(YEAR FROM month) = EXTRACT(YEAR FROM Current_timestamp) \n";
+    private static final String PRODUCT_LEFT_ORDERS_QUERY ="SELECT quantity FROM orders WHERE product = ? AND status != -1";
+    private static final String PRODUCT_LEFT_QUERY ="SELECT quantity FROM products WHERE name = ?";
     public static Connection getConnection() {
         try {
             if (Objects.isNull(connection) || connection.isClosed()) {
@@ -514,5 +516,47 @@ abstract class DatabaseController {
             e.printStackTrace();
         }
         return sum;
+    }
+    public static double OrderesProduct(String name){
+        double sum = 0;
+        double sum2 = 0;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_LEFT_ORDERS_QUERY)) {
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                sum+= resultSet.getInt("quantity");
+            }
+            PreparedStatement preparedStatement2 = connection.prepareStatement(PRODUCT_LEFT_QUERY);
+            preparedStatement2.setString(1,name);
+            resultSet = preparedStatement2.executeQuery();
+            while(resultSet.next()){
+                sum2+= resultSet.getInt("quantity");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ((sum)/(sum2/100))/100;
+    }
+    public static int leftProduct(String name){
+        int sum = 0;
+        int sum2 = 0;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_LEFT_ORDERS_QUERY)) {
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                sum+= resultSet.getInt("quantity");
+            }
+            PreparedStatement preparedStatement2 = connection.prepareStatement(PRODUCT_LEFT_QUERY);
+            preparedStatement2.setString(1,name);
+            resultSet = preparedStatement2.executeQuery();
+            while(resultSet.next()){
+                sum2+= resultSet.getInt("quantity");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sum2-sum;
     }
 }

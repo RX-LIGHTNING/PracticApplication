@@ -12,6 +12,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -24,6 +25,7 @@ public class AdminPanePrice {
     @FXML private VBox productVbox;
     @FXML private Text resultText;
     @FXML private PieChart IngredChart;
+    @FXML private ProgressBar orderedPB;
     private AdminPaneController adminPaneController;
     private Button[] Products;
     private int summary = 0;
@@ -35,6 +37,7 @@ public class AdminPanePrice {
     public void updateProductVbox(){
         List<Product> productList = DatabaseController.getProducts();
         summary = 0;
+
         Products = new Button[productList.size()];
         for (int i = 0; i < productList.size(); i++) {
             summary +=productList.get(i).getQuantity();
@@ -54,6 +57,7 @@ public class AdminPanePrice {
     }
     public  void onSelectProduct(Product product){
         DirectPrice=0;
+        orderedPB.setProgress(DatabaseController.OrderesProduct(product.getName()));
         priceChart.getData().clear();
         IngredChart.getData().clear();
         double inditectcost = (double) (DatabaseController.getIndirectCost() / summary);
@@ -71,7 +75,6 @@ public class AdminPanePrice {
         }
         PieChart.Data slice1 = new PieChart.Data("Косвенные расходы",inditectcost);
         PieChart.Data slice2 = new PieChart.Data("Прямые расходы",DirectPrice);
-        System.out.println(inditectcost);
         resultText.setText("Итого: "+(DirectPrice+inditectcost)+" Рублей");
         priceChart.getData().add(slice1);
         priceChart.getData().add(slice2);
