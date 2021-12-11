@@ -21,5 +21,6 @@
       <Text layoutX="14.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите цену продукта" wrappingWidth="148.5078125" />
       <TextField fx:id="quantityField" layoutX="142.0" layoutY="169.0" />
       <Text layoutX="11.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите количество продукта" wrappingWidth="148.5078125" />
+      <Button layoutX="497.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteProduct" text="Удалить" />
    </children>
 </Pane>

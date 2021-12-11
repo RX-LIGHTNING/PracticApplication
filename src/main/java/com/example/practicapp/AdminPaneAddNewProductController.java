@@ -76,7 +76,12 @@ public class AdminPaneAddNewProductController {
             adminPaneController.showProductsPane();
         }
     }
-
+    public void deleteProduct() throws IOException {
+        if(product!=null) {
+            DatabaseController.productDelete(product.getId());
+            adminPaneController.showProductsPane();
+        }
+    }
     public void setData(AdminPaneController adminPaneController, Product product) {
         this.adminPaneController = adminPaneController;
         if(product != null) {

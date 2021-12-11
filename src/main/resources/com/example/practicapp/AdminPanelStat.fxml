@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicapp.AdminPaneStats">
    <children>
-      <PieChart fx:id="OrdersPieChart" layoutY="203.0" legendSide="LEFT" prefHeight="233.0" prefWidth="291.0" title="Заказы" />
+      <PieChart fx:id="OrdersPieChart" labelLineLength="10.0" layoutY="203.0" legendSide="LEFT" prefHeight="233.0" prefWidth="291.0" title="Заказы" />
       <Accordion layoutX="285.0" layoutY="261.0" />
       <StackedAreaChart fx:id="indirectCost" layoutX="278.0" layoutY="203.0" prefHeight="233.0" prefWidth="284.0" title="Косвенные затраты">
         <xAxis>

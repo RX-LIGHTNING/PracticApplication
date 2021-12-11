@@ -63,6 +63,7 @@ abstract class DatabaseController {
             "AND EXTRACT(YEAR FROM month) = EXTRACT(YEAR FROM Current_timestamp) \n";
     private static final String PRODUCT_LEFT_ORDERS_QUERY ="SELECT quantity FROM orders WHERE product = ? AND status != -1";
     private static final String PRODUCT_LEFT_QUERY ="SELECT quantity FROM products WHERE name = ?";
+    private static final String PRODUCT_DELETE_QUERY = "DELETE FROM products WHERE id = ?";
     public static Connection getConnection() {
         try {
             if (Objects.isNull(connection) || connection.isClosed()) {
@@ -146,6 +147,16 @@ abstract class DatabaseController {
             e.printStackTrace();
         }
         return result;
+    }
+    public static void productDelete(int id) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(PRODUCT_DELETE_QUERY)) {
+            preparedStatement.setInt(1,id);
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     public static List<Product> getProducts(){
         List<Product> result = new ArrayList<>();
