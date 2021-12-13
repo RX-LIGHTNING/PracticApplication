@@ -88,13 +88,13 @@ public class AdminPaneRecipesController {
     }
     public  void onRecipeUpdate(){
         for (int i = 0; i < ingredientFields.length-1; i++) {
-            if(!Objects.equals(ingredientFields[i].getText(), "")) {
+            if(Validator.isNumber(ingredientFields[i].getText())&& !Objects.equals(ingredientFields[i].getText(),"")) {
                 DatabaseController.updateRecipe(temp,
                         Integer.parseInt(ingredientFields[i].getId()),
                         Integer.parseInt(ingredientFields[i].getText()),
                         ingredientFields[ingredientFields.length - 1].getText());
             }
-            else {
+            else{
                 DatabaseController.updateRecipe(temp,
                         Integer.parseInt(ingredientFields[i].getId()),
                         0,

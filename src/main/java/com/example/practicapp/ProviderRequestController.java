@@ -49,8 +49,12 @@ public class ProviderRequestController {
         }
         public void submitRequest() throws IOException {
             for (int i = 0; i < temp.size(); i++) {
-                if(!Objects.equals(tempFields[i].getText(), "")) {
+                if(Validator.isNumber(tempFields[i].getText()) && !Objects.equals(tempFields[i].getText(),"")) {
                     DatabaseController.InsertIngredientPrice(temp.get(i).getIng_id(), Integer.parseInt(tempFields[i].getText()));
+                    mainMenuController.setMyProviderRequestPane();
+                }
+                else if(!Objects.equals(tempFields[i].getText(),"")) {
+                    tempFields[i].setStyle("-fx-background-color: red;");
                 }
             }
         }
