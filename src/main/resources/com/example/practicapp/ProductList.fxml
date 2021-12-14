@@ -18,7 +18,10 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <TextField fx:id="searchField" layoutX="313.0" layoutY="22.0" onAction="#search" onInputMethodTextChanged="#search" onKeyPressed="#search" prefHeight="22.0" prefWidth="88.0" promptText="Поиск" style="-fx-background-color: #C4C4C4; -fx-background-radius: 10px;" />
-      <Button layoutX="387.0" layoutY="22.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="48.0" style="-fx-background-color: #18A4E0; -fx-background-radius: 0px 10px 10px 0px;" text="найти" textAlignment="CENTER" textFill="WHITE" />
+      <TextField fx:id="searchField" layoutX="469.0" layoutY="11.0" onAction="#search" onInputMethodTextChanged="#search" onKeyPressed="#search" prefHeight="26.0" prefWidth="88.0" promptText="Поиск" style="-fx-background-color: #C4C4C4; -fx-background-radius: 10px;" />
+      <Button layoutX="545.0" layoutY="11.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="48.0" style="-fx-background-color: #18A4E0; -fx-background-radius: 0px 10px 10px 0px;" text="найти" textAlignment="CENTER" textFill="WHITE" />
+      <Button layoutX="229.0" layoutY="11.0" mnemonicParsing="false" onAction="#sortUp" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="по возрастанию" />
+      <Button layoutX="343.0" layoutY="11.0" mnemonicParsing="false" onAction="#sortDown" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="по убыванию" />
+      <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: #18A4E0; -fx-text-fill: white;" text="Сброс" />
    </children>
 </Pane>

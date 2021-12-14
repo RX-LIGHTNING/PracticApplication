@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Product {
+public class Product implements Comparable<Product> {
     private String name;
     private int price;
     private Image image;
@@ -64,7 +64,6 @@ public class Product {
         Image img = new Image(new ByteArrayInputStream(rs));
         return img;
     }
-
     public Product(String name, int price, byte[] image, String description, int id, int recipe, int quantity) {
         this.name = name;
         this.price = price;
@@ -74,5 +73,10 @@ public class Product {
         this.id =id;
         this.recipe = recipe;
         this.quantity = quantity;
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return this.getPrice() - o.getPrice();
     }
 }
