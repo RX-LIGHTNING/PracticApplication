@@ -17,8 +17,10 @@ public class ProviderMoreController {
     private Pane mainPane;
     MainMenuController mainMenuController;
     public void setData(MainMenuController mainMenuController, int provider){
+
         this.mainMenuController = mainMenuController;
         List<Provider> providers= DatabaseController.getProvidersById(provider);
+        orgname.setText(providers.get(0).getOrgname());
         Text[] tempText= new Text[providers.size()];
         for (int i = 0; i < providers.size(); i++) {
             if(providers.get(i).getId()==provider) {
