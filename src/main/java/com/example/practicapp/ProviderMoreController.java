@@ -25,7 +25,7 @@ public class ProviderMoreController {
         for (int i = 0; i < providers.size(); i++) {
             if(providers.get(i).getId()==provider) {
                 tempText[i] = new Text();
-                tempText[i].setText("Цена на " + providers.get(i).getIngredientname() + " " + providers.get(i).getPrice());
+                tempText[i].setText("Цена на " + providers.get(i).getIngredientname() + " " + providers.get(i).getPrice()+ " руб/кг");
                 tempText[i].setLayoutX(100);
                 tempText[i].setLayoutY((i + 1) * 30);
                 mainPane.getChildren().add(tempText[i]);
