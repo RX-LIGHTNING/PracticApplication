@@ -34,17 +34,12 @@ public class ProductListController implements Initializable {
         updateGrid("");
     }
     public void updateGrid(String filter){
-
         gridPane.getChildren().clear();
         List<Product> products = DatabaseController.getProducts();
         int column = 0;
         int row = 1;
-        if(status == 1){
-            Collections.sort(products);
-        }
-        else if (status == 2){
-            Collections.sort(products);Collections.reverse(products);
-        }
+        if(status == 1){Collections.sort(products);}
+        else if (status == 2){Collections.sort(products);Collections.reverse(products);}
         try {
             for (int i = 0; i < products.size(); i++) {
                 if (products.get(i).getName().toLowerCase().contains(filter.toLowerCase())) {
@@ -66,7 +61,6 @@ public class ProductListController implements Initializable {
                 gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setMaxWidth(Region.USE_COMPUTED_SIZE);
-                //
                 gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
                 gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
                 gridPane.setMaxHeight(Region.USE_COMPUTED_SIZE);

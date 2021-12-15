@@ -24,13 +24,6 @@ public class SignInController {
     public void applySignIn() throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException, IOException {
         if(DatabaseController.isLoggedIn(loginField.getText(), passwordField.getText())) {
             ApplicationCoreController.ShowMainMenu();
-        }else {
-            if (DatabaseController.isUserExist(loginField.getText())) {
-
-            }
-            else {
-
-            }
+        }
         }
     }
-}
