@@ -46,10 +46,9 @@ public class ProvidersController {
         int row = 1;
         try {
             for (int i = 0; i < providers.size(); i++) {
-                //list sort
                 if(sort==1){Collections.sort(providers);}
                 else if(sort==2){Collections.sort(providers);Collections.reverse(providers);}
-                if(providers.get(i).getOrgname().toLowerCase(Locale.ROOT).contains(filter)&&
+                if(providers.get(i).getOrgname().toLowerCase(Locale.ROOT).contains(filter.toLowerCase())&&
                         providers.get(i).getIngredientname().contains(ingredient)) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProviderItem.fxml"));

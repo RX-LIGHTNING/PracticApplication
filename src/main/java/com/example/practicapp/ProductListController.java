@@ -47,7 +47,7 @@ public class ProductListController implements Initializable {
         }
         try {
             for (int i = 0; i < products.size(); i++) {
-                if (products.get(i).getName().contains(filter)) {
+                if (products.get(i).getName().toLowerCase().contains(filter.toLowerCase())) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("ProductItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();

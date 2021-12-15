@@ -53,7 +53,7 @@ public class AdminPaneOrders {
         try {
             for (int i = 0; i < providers.size(); i++) {
                 if(providers.get(i).getProduct().contains(ingredient)&&
-                    providers.get(i).getOrganzition().toLowerCase(Locale.ROOT).contains(filter)){
+                    providers.get(i).getOrganzition().toLowerCase().contains(filter.toLowerCase())){
 
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("AdminPanelOrdersItem.fxml"));
