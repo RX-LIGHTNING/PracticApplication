@@ -38,7 +38,7 @@ public class MainMenuController {
     @FXML
     VBox NavBar;
     Stage stage;
-    public void setData(Stage stage){
+    public void setData(Stage stage) throws IOException {
         this.stage = stage;
         //
         Image image;
@@ -71,11 +71,17 @@ public class MainMenuController {
             NavBar.getChildren().remove(ProviderButton);
             NavBar.getChildren().remove(ProviderButton1);
             NavBar.getChildren().remove(ProviderButton2);
+            setProductListPane();
         }
         else if(User.getFlag() == 2){
             NavBar.getChildren().remove(CustomerButton1);
             NavBar.getChildren().remove(CustomerButton11);
+            setProvidersPane();
         }
+        else{
+            setProductListPane();
+        }
+
     }
     public void setProductListPane() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();

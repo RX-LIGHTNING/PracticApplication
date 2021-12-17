@@ -19,6 +19,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
@@ -132,6 +134,13 @@ public class AdminPaneOrders {
         FileOutputStream fOut = new FileOutputStream(filePath);
         excelWookBook.write(fOut);
         fOut.close();
+        try {
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(new File("1.xlsx"));
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
 }

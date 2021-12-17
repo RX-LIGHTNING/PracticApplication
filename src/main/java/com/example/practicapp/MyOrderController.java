@@ -14,6 +14,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,7 +39,7 @@ public class MyOrderController{
         int row = 1;
         try {
             for (int i = 0; i < orders.size(); i++) {
-                if (orders.get(i).getProduct().contains(filter)) {
+                if (orders.get(i).getProduct().toLowerCase().contains(filter.toLowerCase())) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("MyOrdersItem.fxml"));
                     Pane anchorPane = fxmlLoader.load();
@@ -90,5 +92,12 @@ public class MyOrderController{
         FileOutputStream fOut = new FileOutputStream(filePath);
         excelWookBook.write(fOut);
         fOut.close();
+        try {
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(new File("1.xlsx"));
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 }

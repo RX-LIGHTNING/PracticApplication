@@ -21,7 +21,7 @@ public class MyOrderItem {
         this.order = order;
         ProductName.setText(order.getProduct());
         StatusBar.setText("Статус: "+order.getStatus());
-        quantityBar.setText("Кол-во: "+order.getQuantity()+"руб/шт");
+        quantityBar.setText("Кол-во: "+order.getQuantity()+" шт");
     }
     public void cancelOrder() throws IOException {
         DatabaseController.OrderCancel(order.getId(),-1);
